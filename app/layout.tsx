@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://jazzy15j.github.io"),
-  title: "Jasmine Builds — Useful systems, built from real life",
+  title: "JDesigns Strategist — Useful systems, built from real life",
   description:
     "Explore Jasmine Stock's public projects: practical AI systems, small-business tools, concert alerts, travel experiences, and JDesigns strategy work.",
   icons: {
@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     shortcut: "/favicon.svg",
   },
   openGraph: {
-    title: "Jasmine Builds",
+    title: "JDesigns Strategist — Public Project Portfolio",
     description: "Useful systems, built from real life.",
     type: "website",
-    images: ["/social-card.png"],
+    images: ["/og.png"],
   },
 };
 

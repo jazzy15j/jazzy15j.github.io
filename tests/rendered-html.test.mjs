@@ -33,7 +33,7 @@ test("server-renders the complete public portfolio", async () => {
   const html = await response.text();
   assert.match(
     html,
-    /<title>Jasmine Builds — Useful systems, built from real life<\/title>/i,
+    /<title>JDesigns Strategist — Useful systems, built from real life<\/title>/i,
   );
   assert.match(html, /Useful systems,/);
   assert.match(html, /Build Your Business Brain/);
@@ -41,13 +41,14 @@ test("server-renders the complete public portfolio", async () => {
   assert.match(html, /Concert Scout/);
   assert.match(html, /Vacation Quest Generator/);
   assert.match(html, /JDesigns Strategist/);
-  assert.match(html, /social-card\.png/);
+  assert.match(html, /og\.png/);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site/);
 });
 
 test("ships the required portfolio assets", async () => {
   await Promise.all([
-    access(new URL("../public/social-card.png", import.meta.url)),
+    access(new URL("../public/og.png", import.meta.url)),
+    access(new URL("../public/jasmine-stock.png", import.meta.url)),
     access(new URL("../public/favicon.svg", import.meta.url)),
     access(new URL("../app/page.tsx", import.meta.url)),
     access(new URL("../app/globals.css", import.meta.url)),

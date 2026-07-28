@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const projects = [
   {
     category: "Business AI systems",
@@ -96,9 +98,9 @@ export default function Home() {
   return (
     <main>
       <nav className="nav shell" aria-label="Main navigation">
-        <a className="brand" href="#top" aria-label="Jasmine Builds home">
-          <span className="brand-mark">JB</span>
-          <span>Jasmine Builds</span>
+        <a className="brand" href="#top" aria-label="JDesigns Strategist home">
+          <span className="brand-mark">✦</span>
+          <span>JDesigns Strategist</span>
         </a>
         <div className="nav-links">
           <a href="#work">Work</a>
@@ -117,7 +119,7 @@ export default function Home() {
       <header className="hero shell" id="top">
         <div className="eyebrow">
           <span className="pulse" />
-          Independent builder · strategist · problem solver
+          Public project portfolio · Jasmine Stock
         </div>
         <h1>
           Useful systems,
@@ -212,7 +214,16 @@ export default function Home() {
       </section>
 
       <section className="about shell" id="about">
-        <div className="about-number">06</div>
+        <div className="about-portrait">
+          <Image
+            src="/jasmine-stock.png"
+            alt="Jasmine Stock, founder of JDesigns Strategist"
+            width={800}
+            height={800}
+            unoptimized
+          />
+          <span>Jasmine · Strategist</span>
+        </div>
         <div className="about-copy">
           <p className="kicker">The person behind the builds</p>
           <h2>
@@ -247,11 +258,11 @@ export default function Home() {
 
       <footer className="footer shell">
         <div>
-          <span className="brand-mark">JB</span>
+          <span className="brand-mark">✦</span>
           <p>
-            Useful systems,
+            JDesigns
             <br />
-            built from real life.
+            Strategist
           </p>
         </div>
         <div className="footer-note">
