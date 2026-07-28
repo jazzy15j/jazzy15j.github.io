@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://jazzy15j.github.io"),
   title: "Jasmine Builds — Useful systems, built from real life",
   description:
     "Explore Jasmine Stock's public projects: practical AI systems, small-business tools, concert alerts, travel experiences, and JDesigns strategy work.",
