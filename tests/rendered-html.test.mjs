@@ -40,6 +40,11 @@ test("server-renders the complete public portfolio", async () => {
   assert.match(html, /Business Brain Command Pack/);
   assert.match(html, /Concert Scout/);
   assert.match(html, /Vacation Quest Generator/);
+  assert.match(html, /Shelf Scout/);
+  assert.match(html, /AI Business Audit/);
+  assert.match(html, /JDesigns System OS/);
+  assert.match(html, /The \$20 Business/);
+  assert.match(html, /Personal Museum Research Lab/);
   assert.match(html, /JDesigns Strategist/);
   assert.match(html, /og\.png/);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site/);

@@ -1,6 +1,20 @@
 import Image from "next/image";
 
-const projects = [
+type Project = {
+  category: string;
+  number: string;
+  title: string;
+  description: string;
+  helps: string;
+  outcome: string;
+  tags: string[];
+  href?: string;
+  source?: string;
+  availability?: string;
+  featured?: boolean;
+};
+
+const projects: Project[] = [
   {
     category: "Business AI systems",
     number: "01",
@@ -70,23 +84,79 @@ const projects = [
     href: "https://www.jdesigns.info",
     source: "https://github.com/jazzy15j/jdesigns-site",
   },
+  {
+    category: "Useful everyday tools",
+    number: "07",
+    title: "Shelf Scout",
+    description:
+      "A pocket book-flipping tool that scans an ISBN, looks up the title, and calculates likely profit after purchase cost, marketplace fees, shipping, and supplies.",
+    helps: "Thrift-store book buyers who need a fast decision before purchasing",
+    outcome: "A clear Buy, Maybe, or Pass verdict with estimated profit, margin, and ROI",
+    tags: ["ISBN scanner", "Profit calculator", "Private build"],
+    availability: "Private working app",
+    featured: true,
+  },
+  {
+    category: "Business AI systems",
+    number: "08",
+    title: "AI Business Audit",
+    description:
+      "A structured intake and delivery experience that turns business context into a practical 90-day strategy across operations, marketing, systems, and useful AI opportunities.",
+    helps: "Small-business owners who need a prioritized plan instead of more disconnected advice",
+    outcome: "A clear diagnostic, opportunity map, and sequenced 90-day action plan",
+    tags: ["Strategy product", "AI audit", "Client experience"],
+    availability: "JDesigns case study",
+  },
+  {
+    category: "Business AI systems",
+    number: "09",
+    title: "JDesigns System OS",
+    description:
+      "A private operating system that connects lead routing, service delivery, audits, content production, revenue decisions, and client offboarding with approval-first workflows.",
+    helps: "A strategy studio managing many kinds of client work without losing context",
+    outcome: "One connected operating model from first inquiry through final delivery",
+    tags: ["Internal OS", "Workflow design", "Sanitized case study"],
+    availability: "Private system",
+  },
+  {
+    category: "Business AI systems",
+    number: "10",
+    title: "The $20 Business",
+    description:
+      "A complete educational system for running a solo business with one AI workspace—from business memory and client folders to daily commands, approvals, branding, selling, and delivery.",
+    helps: "Solo service providers who want a capable system without an expensive software stack",
+    outcome: "A guided foundation, reusable templates, and a practical first-30-days plan",
+    tags: ["Education", "Solo business", "In development"],
+    availability: "Product in development",
+  },
+  {
+    category: "The studio",
+    number: "11",
+    title: "Personal Museum Research Lab",
+    description:
+      "A source-traceable research operating system for testing a more visual, personal, and approachable way to discover, understand, collect, and live with historical art.",
+    helps: "A product idea that needs evidence before features or architecture",
+    outcome: "Auditable research linking sources, signals, assumptions, experiments, reports, and decisions",
+    tags: ["Research OS", "Evidence design", "Exploration"],
+    availability: "Research in progress",
+  },
 ];
 
 const categories = [
   {
     label: "Business AI systems",
-    count: "03",
+    count: "06",
     blurb: "Turn what you know into repeatable, human-approved workflows.",
   },
   {
     label: "Useful everyday tools",
-    count: "02",
+    count: "03",
     blurb: "Small tools that remove searching, planning, and everyday friction.",
   },
   {
-    label: "The studio",
-    count: "01",
-    blurb: "The strategy practice behind the systems and experiments.",
+    label: "The studio & experiments",
+    count: "02",
+    blurb: "The strategy practice, private systems, and evidence-led experiments.",
   },
 ];
 
@@ -194,9 +264,13 @@ export default function Home() {
                 </div>
               </div>
               <div className="project-actions">
-                <a href={project.href} target="_blank" rel="noreferrer">
-                  {project.source ? "Visit site" : "View project"} <Arrow />
-                </a>
+                {project.href ? (
+                  <a href={project.href} target="_blank" rel="noreferrer">
+                    {project.source ? "Visit site" : "View project"} <Arrow />
+                  </a>
+                ) : (
+                  <span className="availability">{project.availability}</span>
+                )}
                 {project.source && (
                   <a
                     className="source-link"

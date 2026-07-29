@@ -466,6 +466,20 @@ a {
   text-underline-offset: 4px;
 }
 
+.project-actions .availability {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid var(--border-green);
+  border-radius: 999px;
+  background: var(--glow);
+  color: var(--green);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .about {
   display: grid;
   grid-template-columns: minmax(220px, 0.8fr) 2fr;

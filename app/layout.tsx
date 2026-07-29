@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://jazzy15j.github.io"),
   title: "JDesigns Strategist — Useful systems, built from real life",
   description:
-    "Explore Jasmine Stock's public projects: practical AI systems, small-business tools, concert alerts, travel experiences, and JDesigns strategy work.",
+    "Explore Jasmine Stock's public projects and private case studies: practical AI systems, small-business tools, research labs, concert alerts, travel experiences, and JDesigns strategy work.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
