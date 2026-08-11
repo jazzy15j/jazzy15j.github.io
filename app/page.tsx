@@ -64,6 +64,18 @@ const projects: Project[] = [
   {
     category: "Useful everyday tools",
     number: "05",
+    title: "Eat Good, Spend Less",
+    description:
+      "A cozy, install-able household meal planner for two that thinks ahead: it decides dinner, builds the grocery list, and tracks what to use first — so opening the app takes about a minute a day.",
+    helps: "Households who want fewer food decisions, not more meal-planning apps",
+    outcome: "A daily command center: tonight's dinner, use-first list, and cook-mode instructions",
+    tags: ["PWA", "No backend", "Offline-friendly"],
+    href: "/eat-good-spend-less",
+    featured: true,
+  },
+  {
+    category: "Useful everyday tools",
+    number: "06",
     title: "Vacation Quest Generator",
     description:
       "Turns a family itinerary into a colorful, downloadable adventure quest with stages, map links, photo challenges, and progress tracking.",
@@ -74,7 +86,7 @@ const projects: Project[] = [
   },
   {
     category: "The studio",
-    number: "06",
+    number: "07",
     title: "JDesigns Strategist",
     description:
       "My main studio site for simple small-business systems, Meta ads guidance, account access help, and practical resources.",
@@ -86,7 +98,7 @@ const projects: Project[] = [
   },
   {
     category: "Useful everyday tools",
-    number: "07",
+    number: "08",
     title: "Shelf Scout",
     description:
       "A pocket book-flipping tool that scans an ISBN, looks up the title, and calculates likely profit after purchase cost, marketplace fees, shipping, and supplies.",
@@ -98,7 +110,7 @@ const projects: Project[] = [
   },
   {
     category: "Business AI systems",
-    number: "08",
+    number: "09",
     title: "AI Business Audit",
     description:
       "A structured intake and delivery experience that turns business context into a practical 90-day strategy across operations, marketing, systems, and useful AI opportunities.",
@@ -109,7 +121,7 @@ const projects: Project[] = [
   },
   {
     category: "Business AI systems",
-    number: "09",
+    number: "10",
     title: "JDesigns System OS",
     description:
       "A private operating system that connects lead routing, service delivery, audits, content production, revenue decisions, and client offboarding with approval-first workflows.",
@@ -120,7 +132,7 @@ const projects: Project[] = [
   },
   {
     category: "Business AI systems",
-    number: "10",
+    number: "11",
     title: "The $20 Business",
     description:
       "A complete educational system for running a solo business with one AI workspace—from business memory and client folders to daily commands, approvals, branding, selling, and delivery.",
@@ -131,7 +143,7 @@ const projects: Project[] = [
   },
   {
     category: "The studio",
-    number: "11",
+    number: "12",
     title: "Personal Museum Research Lab",
     description:
       "A source-traceable research operating system for testing a more visual, personal, and approachable way to discover, understand, collect, and live with historical art.",
@@ -150,7 +162,7 @@ const categories = [
   },
   {
     label: "Useful everyday tools",
-    count: "03",
+    count: "04",
     blurb: "Small tools that remove searching, planning, and everyday friction.",
   },
   {
@@ -265,9 +277,15 @@ export default function Home() {
               </div>
               <div className="project-actions">
                 {project.href ? (
-                  <a href={project.href} target="_blank" rel="noreferrer">
-                    {project.source ? "Visit site" : "View project"} <Arrow />
-                  </a>
+                  project.href.startsWith("/") ? (
+                    <a href={project.href}>
+                      Open app <Arrow />
+                    </a>
+                  ) : (
+                    <a href={project.href} target="_blank" rel="noreferrer">
+                      {project.source ? "Visit site" : "View project"} <Arrow />
+                    </a>
+                  )
                 ) : (
                   <span className="availability">{project.availability}</span>
                 )}

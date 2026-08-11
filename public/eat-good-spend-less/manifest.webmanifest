@@ -1,0 +1,19 @@
+{
+  "name": "Eat Good, Spend Less",
+  "short_name": "Eat Good",
+  "description": "A household meal-planning command center: what's for dinner, what to use first, and what to buy — decided automatically.",
+  "start_url": "/eat-good-spend-less",
+  "scope": "/eat-good-spend-less/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fbf3e6",
+  "theme_color": "#bd5a2c",
+  "icons": [
+    {
+      "src": "/eat-good-spend-less/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
