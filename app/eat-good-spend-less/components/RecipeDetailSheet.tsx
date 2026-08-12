@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useStore } from "../lib/store";
 import { averageRating, costPerServing, isHouseFavorite, totalCost } from "../lib/engine";
+import { usePhotoObjectUrl } from "../lib/photoStore";
 import type { Recipe } from "../lib/types";
 import { DifficultyPill } from "./ui/Pills";
 import { Sheet } from "./ui/Sheet";
@@ -12,6 +13,7 @@ export default function RecipeDetailSheet({ recipe, onClose }: { recipe: Recipe;
   const { state, addRecipeNote, toggleFavorite, setRetired } = useStore();
   const [note, setNote] = useState("");
   const [rateOpen, setRateOpen] = useState(false);
+  const photoUrl = usePhotoObjectUrl(recipe.photoId);
 
   const [jazzyName, tristanName] = state.settings.people;
   const favorite = isHouseFavorite(recipe);
@@ -19,6 +21,10 @@ export default function RecipeDetailSheet({ recipe, onClose }: { recipe: Recipe;
 
   return (
     <Sheet title={recipe.name} onClose={onClose} wide>
+      {photoUrl && (
+        // eslint-disable-next-line @next/next/no-img-element -- blob: URL from IndexedDB
+        <img src={photoUrl} alt="" className="egsl-photo-detail-img" style={{ marginBottom: 14 }} />
+      )}
       <div className="egsl-row egsl-gap-8 egsl-wrap" style={{ marginBottom: 14 }}>
         <span className="egsl-pill egsl-pill-neutral">${totalCost(recipe).toFixed(2)} for two</span>
         <span className="egsl-pill egsl-pill-neutral">${costPerServing(recipe).toFixed(2)} / serving</span>

@@ -24,10 +24,10 @@ const STOCK_LABEL: Record<StockState, string> = {
 };
 
 const STOCK_COLOR: Record<StockState, { bg: string; fg: string }> = {
-  plenty: { bg: "#e3ecd9", fg: "#4f6b48" },
-  some: { bg: "#fdeec1", fg: "#93701a" },
-  low: { bg: "#fbe3d9", fg: "#bd5a2c" },
-  out: { bg: "#f4dde1", fg: "#a54254" },
+  plenty: { bg: "#e3f0de", fg: "var(--egsl-sage-deep)" },
+  some: { bg: "#fbe7b8", fg: "#93701a" },
+  low: { bg: "#fce0ec", fg: "var(--egsl-rust-deep)" },
+  out: { bg: "#fbdce3", fg: "var(--egsl-berry)" },
 };
 
 export function StockPill({ state, onClick }: { state: StockState; onClick?: () => void }) {

@@ -17,12 +17,20 @@ import {
   type DayPlan,
   type InventoryItem,
   type LeftoverAmount,
+  type PhotoLogEntry,
   type Recipe,
   type StockState,
 } from "./types";
 
 const STORAGE_KEY = "egsl:v1";
 const MAX_WEEK_HISTORY = 10;
+
+function slugify(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
 
 function buildFreshState(): AppState {
   const today = todayISO();
@@ -37,7 +45,14 @@ function buildFreshState(): AppState {
     recipes,
     currentWeek,
     weekHistory: [],
+    photoLog: [],
   };
+}
+
+/** Fills in fields added after a user's data was first saved, so old
+ * localStorage payloads don't crash the app on new fields. */
+function normalizeState(s: AppState): AppState {
+  return { ...s, photoLog: Array.isArray(s.photoLog) ? s.photoLog : [] };
 }
 
 /** Carries a stored state forward if the real calendar has moved past it. */
@@ -67,7 +82,7 @@ function loadInitialState(): AppState {
     if (!parsed || typeof parsed !== "object" || !parsed.currentWeek) {
       return rollForward(buildFreshState());
     }
-    return rollForward(parsed);
+    return rollForward(normalizeState(parsed));
   } catch {
     return rollForward(buildFreshState());
   }
@@ -103,6 +118,11 @@ interface StoreValue {
     inventoryUpdates: { id: string; state: StockState }[],
     extraUseFirst: string[],
   ) => void;
+  addCustomRecipe: (recipe: Omit<Recipe, "id" | "ratings" | "isCustom">) => string;
+  setRecipePhoto: (recipeId: string, photoId: string | undefined) => void;
+  addPhotoLogEntry: (entry: PhotoLogEntry) => void;
+  updatePhotoLogEntry: (id: string, partial: Partial<Omit<PhotoLogEntry, "id">>) => void;
+  deletePhotoLogEntry: (id: string) => void;
   exportBackup: () => string;
   importBackup: (json: string) => { ok: boolean; error?: string };
   resetDemoData: () => void;
@@ -353,6 +373,40 @@ export function EGSLProvider({ children }: { children: React.ReactNode }) {
     [],
   );
 
+  const addCustomRecipe = useCallback((recipe: Omit<Recipe, "id" | "ratings" | "isCustom">): string => {
+    const id = `${slugify(recipe.name) || "recipe"}-${Date.now()}`;
+    setState((s) => {
+      if (!s) return s;
+      const newRecipe: Recipe = { ...recipe, id, ratings: [], isCustom: true };
+      return { ...s, recipes: [...s.recipes, newRecipe] };
+    });
+    return id;
+  }, []);
+
+  const setRecipePhoto = useCallback((recipeId: string, photoId: string | undefined) => {
+    setState((s) => {
+      if (!s) return s;
+      const recipes = s.recipes.map((r) => (r.id === recipeId ? { ...r, photoId } : r));
+      return { ...s, recipes };
+    });
+  }, []);
+
+  const addPhotoLogEntry = useCallback((entry: PhotoLogEntry) => {
+    setState((s) => (s ? { ...s, photoLog: [entry, ...s.photoLog] } : s));
+  }, []);
+
+  const updatePhotoLogEntry = useCallback((id: string, partial: Partial<Omit<PhotoLogEntry, "id">>) => {
+    setState((s) => {
+      if (!s) return s;
+      const photoLog = s.photoLog.map((p) => (p.id === id ? { ...p, ...partial } : p));
+      return { ...s, photoLog };
+    });
+  }, []);
+
+  const deletePhotoLogEntry = useCallback((id: string) => {
+    setState((s) => (s ? { ...s, photoLog: s.photoLog.filter((p) => p.id !== id) } : s));
+  }, []);
+
   const exportBackup = useCallback((): string => {
     return JSON.stringify(state, null, 2);
   }, [state]);
@@ -363,7 +417,7 @@ export function EGSLProvider({ children }: { children: React.ReactNode }) {
       if (!parsed || !parsed.currentWeek || !parsed.recipes || !parsed.inventory) {
         return { ok: false, error: "That file doesn't look like an Eat Good, Spend Less backup." };
       }
-      setState(rollForward(parsed));
+      setState(rollForward(normalizeState(parsed)));
       return { ok: true };
     } catch {
       return { ok: false, error: "Couldn't read that file." };
@@ -393,6 +447,11 @@ export function EGSLProvider({ children }: { children: React.ReactNode }) {
       setRetired,
       setGroceryFlag,
       runWeeklyReset,
+      addCustomRecipe,
+      setRecipePhoto,
+      addPhotoLogEntry,
+      updatePhotoLogEntry,
+      deletePhotoLogEntry,
       exportBackup,
       importBackup,
       resetDemoData,
@@ -414,6 +473,11 @@ export function EGSLProvider({ children }: { children: React.ReactNode }) {
     setRetired,
     setGroceryFlag,
     runWeeklyReset,
+    addCustomRecipe,
+    setRecipePhoto,
+    addPhotoLogEntry,
+    updatePhotoLogEntry,
+    deletePhotoLogEntry,
     exportBackup,
     importBackup,
     resetDemoData,

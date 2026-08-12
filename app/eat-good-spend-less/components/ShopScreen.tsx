@@ -97,7 +97,9 @@ export default function ShopScreen() {
     <div style={{ paddingTop: 22 }}>
       <p className="egsl-eyebrow">Shop</p>
       <h1 className="egsl-page-title">Grocery list</h1>
-      <p className="egsl-page-sub">Built automatically from this week&apos;s dinners and what&apos;s already in the kitchen.</p>
+      <p className="egsl-page-sub">
+        Built for you from this week&apos;s dinners and what&apos;s already home — no list-making required.
+      </p>
 
       <div className="egsl-card egsl-budget-card">
         <div>
@@ -115,6 +117,12 @@ export default function ShopScreen() {
           </span>
         </div>
       </div>
+
+      {under && remaining > 0 && (
+        <p className="egsl-page-hook" style={{ marginTop: -10 }}>
+          Nice — ${remaining.toFixed(2)} left to play with. 🎉
+        </p>
+      )}
 
       {list.doNotBuyAgain.length > 0 && (
         <div className="egsl-card" style={{ padding: "14px 18px", marginBottom: 20, background: "var(--egsl-cream-deep)" }}>

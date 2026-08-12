@@ -5,6 +5,7 @@ import { useStore } from "../lib/store";
 import {
   addSpendTierPoints,
   buildGroceryList,
+  computeCookingStreak,
   computeMonthlyStats,
   computeWeeklyScore,
 } from "../lib/engine";
@@ -37,6 +38,11 @@ export default function ScoreScreen() {
     const base = computeWeeklyScore(state.currentWeek, state.recipes, state.inventory, today);
     return addSpendTierPoints(base, groceryList.estimatedCart, state.currentWeek.budgetTarget);
   }, [state.currentWeek, state.recipes, state.inventory, today, groceryList.estimatedCart]);
+
+  const streak = useMemo(
+    () => computeCookingStreak([...state.weekHistory, state.currentWeek], today),
+    [state.weekHistory, state.currentWeek, today],
+  );
 
   const overdueWaste = state.inventory.some(
     (i) => i.category === "produce" && i.state !== "out" && i.useByDate && i.useByDate < today,
@@ -71,6 +77,12 @@ export default function ScoreScreen() {
           </div>
           <span style={{ fontSize: 44 }}>🏆</span>
         </div>
+
+        {streak >= 1 && (
+          <p className="egsl-page-hook" style={{ marginBottom: 16 }}>
+            🔥 {streak}-night cooking streak — keep it going.
+          </p>
+        )}
 
         {weeklyScore.breakdown.length === 0 ? (
           <p className="egsl-faint" style={{ fontSize: 13 }}>
