@@ -2,7 +2,7 @@
 // Every function here is pure — given the same state, it returns the same
 // answer, which is what makes "the app thinks ahead for me" trustworthy.
 
-import { daysBetween, todayISO } from "./dates";
+import { addDays, daysBetween, todayISO } from "./dates";
 import { costPerServing, totalCost } from "./seedData";
 import {
   ARCHETYPE_LABEL,
@@ -635,6 +635,22 @@ export function computeMonthlyStats(
       ? { name: recipeById.get(mostRepeatedEntry[0])?.name ?? "—", count: mostRepeatedEntry[1] }
       : null,
   };
+}
+
+/** Consecutive days, walking back from today, that didn't get takeout. */
+export function computeCookingStreak(weeks: WeekPlan[], today = todayISO()): number {
+  const byDate = new Map(
+    weeks.flatMap((w) => w.days).map((d) => [d.date, d] as const),
+  );
+  let streak = 0;
+  let cursor = today;
+  while (true) {
+    const day = byDate.get(cursor);
+    if (!day || day.date > today || day.ateSomethingElse) break;
+    streak += 1;
+    cursor = addDays(cursor, -1);
+  }
+  return streak;
 }
 
 export { costPerServing, totalCost, ARCHETYPE_LABEL };

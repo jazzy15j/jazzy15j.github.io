@@ -64,7 +64,9 @@ export default function KitchenScreen() {
           + Add item
         </button>
       </div>
-      <p className="egsl-page-sub">Tap a status pill to update it. Tap the name for more detail.</p>
+      <p className="egsl-page-sub">
+        One tap to update anything — no inventory homework. Tap a name for more detail.
+      </p>
 
       {useFirst.length > 0 && (
         <section className="egsl-card egsl-usefirst-card">

@@ -10,7 +10,7 @@ import {
   totalCost,
 } from "../lib/engine";
 import { addDays, fullWeekdayName, monthDay, todayISO } from "../lib/dates";
-import type { DayPlan } from "../lib/types";
+import { ARCHETYPE_HOOK, type DayPlan } from "../lib/types";
 import { DifficultyPill, TagPills } from "./ui/Pills";
 import CookMode from "./CookMode";
 import QuickSwapSheet from "./QuickSwapSheet";
@@ -64,6 +64,7 @@ export default function TodayScreen({ onNavigate }: { onNavigate: (screen: Scree
       <div style={{ paddingTop: 22 }}>
         <p className="egsl-eyebrow">Today · {fullWeekdayName(today)}</p>
         <h1 className="egsl-page-title">{monthDay(today)}</h1>
+        <p className="egsl-page-hook">{ARCHETYPE_HOOK[day.archetype]}</p>
       </div>
 
       {breakfastPick && (

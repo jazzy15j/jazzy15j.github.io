@@ -27,7 +27,7 @@ function RatingRow({
               minWidth: 34,
               padding: "8px 0",
               background: value === n ? "var(--egsl-rust)" : "var(--egsl-paper)",
-              color: value === n ? "#fff8ec" : "var(--egsl-ink-soft)",
+              color: value === n ? "#fff6fa" : "var(--egsl-ink-soft)",
               border: "1.5px solid " + (value === n ? "var(--egsl-rust)" : "var(--egsl-line)"),
             }}
           >

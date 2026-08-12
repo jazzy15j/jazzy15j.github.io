@@ -69,8 +69,7 @@ export default function ThisWeekScreen() {
         </button>
       </div>
       <p className="egsl-page-sub">
-        Drag the handle to rearrange dinners. Use-first priority and the shopping list update
-        automatically.
+        Drag to shuffle the week — the use-first list and grocery list quietly follow along.
       </p>
 
       <div style={{ display: "grid", gap: 14 }}>

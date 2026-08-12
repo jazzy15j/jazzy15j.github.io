@@ -2,22 +2,25 @@
    Scoped under .egsl-root so it never leaks into the portfolio shell. */
 
 .egsl-root {
-  --egsl-cream: #fbf3e6;
-  --egsl-cream-deep: #f2e3c9;
-  --egsl-paper: #fffdf9;
-  --egsl-ink: #392c20;
-  --egsl-ink-soft: #6f5d49;
-  --egsl-ink-faint: #96876f;
-  --egsl-rust: #bd5a2c;
-  --egsl-rust-deep: #93431e;
-  --egsl-sage: #74936a;
-  --egsl-sage-deep: #4f6b48;
-  --egsl-gold: #d29a3f;
-  --egsl-butter: #f3d78e;
-  --egsl-berry: #a54254;
-  --egsl-line: #e6d5b3;
-  --egsl-line-soft: #efe2c4;
-  --egsl-shadow: rgba(58, 40, 20, 0.14);
+  /* Blush cottage-kitchen palette: soft pinks with sage + gold accents.
+     Token names kept as-is (e.g. --egsl-rust is now the primary pink) so
+     every component that references them stays in sync automatically. */
+  --egsl-cream: #fff2f6;
+  --egsl-cream-deep: #fbdce9;
+  --egsl-paper: #fffafc;
+  --egsl-ink: #4a2036;
+  --egsl-ink-soft: #8c5c71;
+  --egsl-ink-faint: #ad7d91;
+  --egsl-rust: #e0568c;
+  --egsl-rust-deep: #b23a6d;
+  --egsl-sage: #7fa476;
+  --egsl-sage-deep: #55764a;
+  --egsl-gold: #dda53f;
+  --egsl-butter: #f8dfa0;
+  --egsl-berry: #c23f63;
+  --egsl-line: #f6d9e6;
+  --egsl-line-soft: #fbeaf2;
+  --egsl-shadow: rgba(178, 58, 109, 0.14);
   --egsl-font-serif: "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
   --egsl-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
   --egsl-radius-lg: 22px;
@@ -55,8 +58,8 @@
   align-items: center;
   justify-content: center;
   gap: 14px;
-  background: #fbf3e6;
-  color: #6f5d49;
+  background: #fff2f6;
+  color: #8c5c71;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
 }
 
@@ -87,7 +90,7 @@
   justify-content: space-between;
   gap: 12px;
   padding: 16px 20px;
-  background: rgba(251, 243, 230, 0.92);
+  background: rgba(255, 242, 246, 0.92);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--egsl-line);
 }
@@ -110,7 +113,7 @@
   place-items: center;
   border-radius: 50%;
   background: var(--egsl-rust);
-  color: #fff8ec;
+  color: #fff6fa;
   font-size: 17px;
   box-shadow: 0 4px 10px var(--egsl-shadow);
 }
@@ -159,37 +162,38 @@
   display: flex;
   justify-content: center;
   padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-  background: rgba(251, 243, 230, 0.94);
+  background: rgba(255, 242, 246, 0.94);
   backdrop-filter: blur(12px);
   border-top: 1px solid var(--egsl-line);
 }
 
 .egsl-nav-inner {
   width: 100%;
-  max-width: 640px;
+  max-width: 680px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 4px;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
 }
 
 .egsl-nav-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
-  padding: 7px 2px;
+  gap: 2px;
+  padding: 7px 1px;
   border: none;
   background: transparent;
   border-radius: var(--egsl-radius-sm);
   color: var(--egsl-ink-faint);
-  font-size: 10.5px;
+  font-size: 9.2px;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
   transition: color 120ms ease, background 120ms ease;
 }
 
 .egsl-nav-btn .egsl-nav-icon {
-  font-size: 19px;
+  font-size: 18px;
   line-height: 1;
 }
 
@@ -245,7 +249,7 @@
 
 .egsl-toptabs button.active {
   background: var(--egsl-rust);
-  color: #fff8ec;
+  color: #fff6fa;
 }
 
 .egsl-toptabs button:not(.active):hover {
@@ -284,6 +288,14 @@
   max-width: 60ch;
 }
 
+.egsl-page-hook {
+  font-family: var(--egsl-font-serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--egsl-rust-deep);
+  margin: 0 0 20px;
+}
+
 /* Cards ------------------------------------------------------------------- */
 
 .egsl-card {
@@ -316,7 +328,7 @@
 
 .egsl-btn-primary {
   background: var(--egsl-rust);
-  color: #fff8ec;
+  color: #fff6fa;
   box-shadow: 0 10px 20px -10px rgba(157, 68, 26, 0.55);
 }
 
@@ -348,7 +360,7 @@
 
 .egsl-btn-sage {
   background: var(--egsl-sage);
-  color: #fbf9f0;
+  color: #fff6fa;
 }
 
 .egsl-btn-sage:hover {
@@ -387,13 +399,13 @@
   white-space: nowrap;
 }
 
-.egsl-pill-use-first { background: #fbe3d9; color: var(--egsl-rust-deep); }
-.egsl-pill-freezer { background: #dbeaf4; color: #2f5c78; }
-.egsl-pill-pantry-heavy { background: #ece2cf; color: #7a5f2c; }
-.egsl-pill-leftover-night { background: #e7ddf5; color: #614a8a; }
-.egsl-pill-new-recipe { background: #fdeec1; color: #93701a; }
-.egsl-pill-house-favorite { background: #e3ecd9; color: var(--egsl-sage-deep); }
-.egsl-pill-no-cook { background: #f1f1ea; color: #5c5c50; }
+.egsl-pill-use-first { background: #fce0ec; color: var(--egsl-rust-deep); }
+.egsl-pill-freezer { background: #e3eefb; color: #3d6a8c; }
+.egsl-pill-pantry-heavy { background: #f3e2d9; color: #8c6a4a; }
+.egsl-pill-leftover-night { background: #f0e1f6; color: #6b4e8f; }
+.egsl-pill-new-recipe { background: #fbe7b8; color: #93701a; }
+.egsl-pill-house-favorite { background: #e3f0de; color: var(--egsl-sage-deep); }
+.egsl-pill-no-cook { background: #f5edf0; color: #6b5c63; }
 .egsl-pill-neutral { background: var(--egsl-cream-deep); color: var(--egsl-ink-soft); }
 
 /* Generic empty / loading states -------------------------------------------- */
@@ -550,7 +562,7 @@
 
 .egsl-segmented button.active {
   border-color: var(--egsl-rust);
-  background: #fbe3d9;
+  background: #fce0ec;
   color: var(--egsl-rust-deep);
 }
 
@@ -601,20 +613,20 @@
 }
 
 .egsl-today-banner-prep {
-  background: #fdeec1;
+  background: #fbe7b8;
   color: #6b5417;
 }
 .egsl-today-banner-prep .egsl-today-banner-label { color: #93701a; }
 
 .egsl-today-banner-warn {
-  background: #f4dde1;
-  color: #7c2e3c;
+  background: #fbdce3;
+  color: #7a2b45;
 }
 .egsl-today-banner-warn .egsl-today-banner-label { color: var(--egsl-berry); }
 
 .egsl-today-banner-use-first {
-  background: #fbe3d9;
-  color: #7a3416;
+  background: #fce0ec;
+  color: #7a2e52;
 }
 .egsl-today-banner-use-first .egsl-today-banner-label { color: var(--egsl-rust-deep); }
 
@@ -718,7 +730,7 @@
 
 .egsl-today-flag {
   background: var(--egsl-rust);
-  color: #fff8ec;
+  color: #fff6fa;
   font-size: 9.5px;
   padding: 2px 8px;
   border-radius: 999px;
@@ -820,7 +832,7 @@
   border-radius: 8px;
   border: 1.5px solid var(--egsl-line);
   background: var(--egsl-paper);
-  color: #fff8ec;
+  color: #fff6fa;
   font-size: 14px;
   font-weight: 800;
   display: grid;
@@ -879,7 +891,7 @@
   padding: 18px;
   margin-bottom: 22px;
   border-color: var(--egsl-gold);
-  background: linear-gradient(180deg, #fdf6e6, var(--egsl-paper) 70%);
+  background: linear-gradient(180deg, #fdf3e2, var(--egsl-paper) 70%);
 }
 
 .egsl-usefirst-row {
@@ -957,7 +969,7 @@
 .egsl-filter-chip.active {
   border-color: var(--egsl-rust);
   background: var(--egsl-rust);
-  color: #fff8ec;
+  color: #fff6fa;
 }
 
 .egsl-recipe-grid {
@@ -986,6 +998,22 @@
   border-color: var(--egsl-rust);
 }
 
+.egsl-recipe-card-photo {
+  display: block;
+  width: 100%;
+  height: 96px;
+  border-radius: var(--egsl-radius-sm);
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.egsl-recipe-card-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .egsl-recipe-card-name {
   font-family: var(--egsl-font-serif);
   font-size: 18px;
@@ -1002,7 +1030,7 @@
   font-weight: 800;
   letter-spacing: 0.04em;
   color: var(--egsl-sage-deep);
-  background: #e3ecd9;
+  background: #e3f0de;
   padding: 4px 9px;
   border-radius: 999px;
 }
@@ -1025,6 +1053,66 @@
   background: var(--egsl-paper);
 }
 
+/* Photo log ------------------------------------------------------------------- */
+
+.egsl-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  gap: 10px;
+}
+
+.egsl-photo-thumb {
+  aspect-ratio: 1;
+  border-radius: var(--egsl-radius-md);
+  border: 1px solid var(--egsl-line);
+  overflow: hidden;
+  padding: 0;
+  background: var(--egsl-cream-deep);
+  display: grid;
+  place-items: center;
+  transition: transform 120ms ease;
+}
+
+.egsl-photo-thumb:hover {
+  transform: translateY(-2px);
+}
+
+.egsl-photo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.egsl-photo-thumb-loading {
+  font-size: 22px;
+  opacity: 0.5;
+}
+
+.egsl-photo-detail-img {
+  width: 100%;
+  border-radius: var(--egsl-radius-md);
+  display: block;
+  object-fit: cover;
+  max-height: 420px;
+}
+
+.egsl-photo-picker-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.egsl-photo-picker-preview img {
+  width: 100%;
+  max-width: 280px;
+  border-radius: var(--egsl-radius-md);
+  border: 1px solid var(--egsl-line);
+  object-fit: cover;
+  display: block;
+}
+
 /* Cook mode ------------------------------------------------------------------ */
 
 .egsl-cookmode {
@@ -1032,7 +1120,7 @@
   inset: 0;
   z-index: 200;
   background: var(--egsl-ink);
-  color: #fbf3e6;
+  color: #fff6fa;
   display: flex;
   flex-direction: column;
   padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
@@ -1049,7 +1137,7 @@
 .egsl-cookmode-top .egsl-icon-btn {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.16);
-  color: #fbf3e6;
+  color: #fff6fa;
 }
 
 .egsl-cookmode-title {

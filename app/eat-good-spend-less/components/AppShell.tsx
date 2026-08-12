@@ -9,9 +9,10 @@ import ShopScreen from "./ShopScreen";
 import KitchenScreen from "./KitchenScreen";
 import RecipesScreen from "./RecipesScreen";
 import ScoreScreen from "./ScoreScreen";
+import PhotosScreen from "./PhotosScreen";
 import { Sheet } from "./ui/Sheet";
 
-type Screen = "today" | "week" | "shop" | "kitchen" | "recipes" | "score";
+type Screen = "today" | "week" | "shop" | "kitchen" | "recipes" | "score" | "photos";
 
 const TABS: { id: Screen; label: string; icon: string }[] = [
   { id: "today", label: "Today", icon: "☀️" },
@@ -19,6 +20,7 @@ const TABS: { id: Screen; label: string; icon: string }[] = [
   { id: "shop", label: "Shop", icon: "🛒" },
   { id: "recipes", label: "Recipes", icon: "📖" },
   { id: "kitchen", label: "Kitchen", icon: "🧺" },
+  { id: "photos", label: "Photos", icon: "📸" },
   { id: "score", label: "Score", icon: "🏆" },
 ];
 
@@ -66,6 +68,7 @@ export default function AppShell() {
         {screen === "shop" && <ShopScreen />}
         {screen === "kitchen" && <KitchenScreen />}
         {screen === "recipes" && <RecipesScreen />}
+        {screen === "photos" && <PhotosScreen />}
         {screen === "score" && <ScoreScreen />}
       </main>
 

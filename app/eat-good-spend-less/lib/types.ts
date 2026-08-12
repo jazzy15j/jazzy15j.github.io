@@ -102,6 +102,10 @@ export interface Recipe {
   prepAhead?: string;
   /** Simple remix suggestions: "if you have leftover X, make this". */
   goodLeftoverRemixFor?: string[];
+  /** IndexedDB photo id (see lib/photoStore.ts). Takes priority over icon when set. */
+  photoId?: string;
+  /** True for meals added by hand rather than part of the seed data. */
+  isCustom?: boolean;
 }
 
 export type LeftoverAmount = "none" | "one" | "two" | "a-lot";
@@ -145,6 +149,15 @@ export interface AppSettings {
   people: [string, string];
 }
 
+/** Metadata for a photo log entry — the actual image bytes live in
+ * IndexedDB (lib/photoStore.ts), keyed by this entry's id. */
+export interface PhotoLogEntry {
+  id: string;
+  createdAt: string; // ISO datetime
+  caption?: string;
+  linkedRecipeId?: string;
+}
+
 export interface AppState {
   version: number;
   settings: AppSettings;
@@ -152,6 +165,7 @@ export interface AppState {
   recipes: Recipe[];
   currentWeek: WeekPlan;
   weekHistory: WeekPlan[]; // completed / prior weeks, most recent last
+  photoLog: PhotoLogEntry[];
 }
 
 export const DAY_LABELS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const;
@@ -168,3 +182,15 @@ export const ARCHETYPE_LABEL: Record<DayArchetype, string> = {
 };
 
 export const DEFAULT_WEEKLY_BUDGET = 65;
+
+/** One short, warm line per night's "chapter" — flavor, not filler. */
+export const ARCHETYPE_HOOK: Record<DayArchetype, string> = {
+  bowl: "Bowl night — stack it, don't stress it.",
+  taco: "Taco night. Everyone wins.",
+  comfort: "Cozy and low-effort tonight.",
+  pasta: "Pasta o'clock.",
+  fun: "Easy and a little fun tonight.",
+  wildcard: "New recipe — adventure time!",
+  leftover: "Leftover magic, fridge cleared like a pro.",
+  breakfast: "Breakfast for dinner, because rules are made up.",
+};
