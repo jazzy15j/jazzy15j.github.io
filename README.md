@@ -12,6 +12,15 @@ in plain language: what it does, who it helps, and why it matters.
 - **Useful everyday tools** — Concert Scout and Vacation Quest Generator
 - **The studio** — JDesigns Strategist
 
+## Private pages
+
+- `/eat-good-spend-less` — household meal planner (PWA)
+- `/our-vegas-love-story` — Jasmine & Tristan's Las Vegas anniversary trip planner
+  (itinerary, live budget, maps, passport; saves to browser storage; installable;
+  not linked from the portfolio and set to `noindex`). Photos live in
+  `public/our-vegas-love-story/photos` with licenses in
+  `app/our-vegas-love-story/lib/credits.json`.
+
 ## Run locally
 
 Requires Node.js 22.13 or newer.
