@@ -20,7 +20,12 @@ function freshState(): AppState {
     food: {},
     packing: structuredClone(DEFAULT_PACKING),
     groceries: DEFAULT_GROCERIES.map((g, i) => ({ id: `g-${i}`, name: g.name, qty: g.qty, price: null, inRoom: false })),
-    confirmed: {},
+    confirmed: {
+      "hakkasan-hours": { done: true, note: "Verified Nov 6: Mon–Wed 5–7 PM, bar only." },
+      "beauty-hours": { done: true, note: "Verified Nov 6: Sun–Thu 5–7 PM, bar." },
+      "tao-hours": { done: true, note: "Verified Nov 6: Sun–Wed 8:30–10 PM, bar & lounge." },
+      "lethai-hours": { done: true, note: "Verified Nov 6: Mon–Thu 4–6 PM." },
+    },
     notes: "",
     dayNotes: {},
   };
@@ -48,7 +53,7 @@ function hydrate(raw: unknown): AppState {
     food: r.food ?? {},
     packing: Array.isArray(r.packing) ? r.packing : base.packing,
     groceries: Array.isArray(r.groceries) ? r.groceries : base.groceries,
-    confirmed: r.confirmed ?? {},
+    confirmed: { ...base.confirmed, ...(r.confirmed ?? {}) },
     notes: r.notes ?? "",
     dayNotes: r.dayNotes ?? {},
   };
