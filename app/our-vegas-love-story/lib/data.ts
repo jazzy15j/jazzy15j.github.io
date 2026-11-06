@@ -337,7 +337,7 @@ export const STOPS: Stop[] = [
       time: "~10 min",
       how: "From The Signature, follow the covered walkway into MGM Grand and head to the Hakkasan entrance on the casino level.",
     },
-    confirm: [c("hakkasan-hours", "Hakkasan Social Hour days, times & menu prices — check the official page.")],
+    confirm: [c("hakkasan-hours", "Hakkasan Social Hour: posted as Mon–Wed 5–7 PM, bar seating only (verified on the venue site Nov 6). Re-check the day before we go.")],
   },
   {
     id: "mon-instacart",
@@ -469,7 +469,7 @@ export const STOPS: Stop[] = [
       time: "~3 min",
       how: "Inside the Cosmopolitan — head up to the 3rd floor and look for the pawn shop entrance.",
     },
-    confirm: [c("beauty-hours", "Beauty & Essex Social Hour days, times & menu prices — check the official page.")],
+    confirm: [c("beauty-hours", "Beauty & Essex Social Hour: posted as Sun–Thu 5–7 PM at the bar (verified on the venue site Nov 6). Re-check the day before we go.")],
   },
   {
     id: "tue-bellagio",
@@ -718,7 +718,7 @@ export const STOPS: Stop[] = [
       how: "Walk back south from the Wynn to The Venetian; TAO is on the casino level.",
     },
     confirm: [
-      c("tao-hours", "TAO Social Hour days/times — the published window may not include 8:30 PM. Verify, and reserve if possible."),
+      c("tao-hours", "TAO Social Hour: posted as Sun–Wed 8:30–10 PM at the bar & lounge (verified on the venue site Nov 6). TAO also lists a Veterans Day event on 11/11 — check it doesn’t change Social Hour."),
     ],
   },
   {
@@ -799,7 +799,7 @@ export const STOPS: Stop[] = [
   {
     id: "thu-lethai",
     day: 3,
-    time: "4:00 – 5:00 PM",
+    time: "4:00 – 5:15 PM",
     start: 16 * 60,
     title: "Le Thai Happy Hour",
     kind: "drink",
@@ -821,13 +821,13 @@ export const STOPS: Stop[] = [
       time: "~4 min",
       how: "Get off the Deuce at Fremont Street/Las Vegas Blvd and walk east along Fremont East.",
     },
-    confirm: [c("lethai-hours", "Le Thai happy-hour days/times & prices — check the menu page.")],
+    confirm: [c("lethai-hours", "Le Thai Happy Hour: posted as Mon–Thu 4–6 PM, with prices on its menu page (verified Nov 6). Re-check the day before we go.")],
   },
   {
     id: "thu-park",
     day: 3,
-    time: "5:15 – 6:15 PM",
-    start: 17 * 60 + 15,
+    time: "5:45 – 6:45 PM",
+    start: 17 * 60 + 45,
     title: "Park on Fremont Happy Hour",
     kind: "drink",
     blurb: "A leafy patio and cozy bar right on Fremont East for a second happy hour.",
@@ -848,13 +848,13 @@ export const STOPS: Stop[] = [
       time: "~2 min",
       how: "A quick stroll along Fremont East from Le Thai.",
     },
-    confirm: [c("park-hours", "Park on Fremont happy-hour days/times & prices — check the website.")],
+    confirm: [c("park-hours", "Park on Fremont: happy hour is posted as Wed–Fri 5–7 PM, but its site metadata lists Wed/Thu opening at 6 PM, and happy-hour prices aren’t published. Call (725) 210-0306 to confirm the opening time and prices.")],
   },
   {
     id: "thu-fse",
     day: 3,
-    time: "6:30 – 9:00 PM",
-    start: 18 * 60 + 30,
+    time: "7:00 – 9:15 PM",
+    start: 19 * 60,
     title: "Fremont Street Experience",
     kind: "show",
     blurb: "A canopy of lights, live music, zip-liners overhead and neon in every direction. Free fun.",
@@ -880,8 +880,8 @@ export const STOPS: Stop[] = [
   {
     id: "thu-return",
     day: 3,
-    time: "9:00 PM",
-    start: 21 * 60,
+    time: "9:30 PM",
+    start: 21 * 60 + 30,
     title: "Return by Deuce",
     kind: "ride",
     blurb: "Your 24-hour passes are already paid for. Ride the Deuce back down the Strip.",
@@ -989,6 +989,12 @@ export interface Eatery {
   menuUrl: string;
   menuLabel: string;
   confirmId: string;
+  /** What the venue's own site says (read Nov 6, 2026). */
+  verified: string;
+  caveat?: string;
+  picks: string[];
+  pickTotal: string;
+  tip?: string;
 }
 
 export const EATERIES: Eatery[] = [
@@ -1002,9 +1008,13 @@ export const EATERIES: Eatery[] = [
     address: "3799 S Las Vegas Blvd, Las Vegas, NV 89109",
     blurb: "Glamorous lacquered dining room; the Social Hour is the budget-friendly way in.",
     socialUrl: "https://taogroup.com/venues/hakkasan-las-vegas/social-hour/",
-    menuUrl: "https://taogroup.com/venues/hakkasan-las-vegas/social-hour/",
+    menuUrl: "https://taogroup.com/venues/hakkasan-las-vegas/menu/",
     menuLabel: "Social hour menu",
     confirmId: "hakkasan-hours",
+    verified: "Social Hour: Mon–Wed, 5–7 PM, at the bar only. Bites, dim sum, two specialty cocktails and select wine/sake are all $10 each.",
+    picks: ["Hakka Basket dim sum (king crab, shumai, truffle mushroom) $10", "Glazed Duroc Pork Belly Buns $10", "Drunken Wonton $10", "Hot Tropics cocktail $10", "Hakkasan Mule $10"],
+    pickTotal: "5 items ≈ $50 + tax and a 20% tip ≈ $64",
+    tip: "Seats are at the bar and first-come, so arrive right at 6:00. Swap a cocktail for a $10 glass of sparkling if you want a toast.",
   },
   {
     id: "beauty",
@@ -1016,9 +1026,13 @@ export const EATERIES: Eatery[] = [
     address: "3708 S Las Vegas Blvd (Cosmopolitan, 3rd floor), Las Vegas, NV 89109",
     blurb: "Hidden behind a pawn-shop front. Glittering, playful, very photogenic.",
     socialUrl: "https://taogroup.com/venues/beauty-essex-las-vegas/social-hour/",
-    menuUrl: "https://taogroup.com/venues/beauty-essex-las-vegas/social-hour/",
+    menuUrl: "https://taogroup.com/venues/beauty-essex-las-vegas/menu/",
     menuLabel: "Social hour menu",
     confirmId: "beauty-hours",
+    verified: "Social Hour: Sun–Thu, 5–7 PM, at the bar. Light bites, two cocktails and select wine are $10 each.",
+    picks: ["Grilled Cheese & Tomato Soup Dumplings $10 (their signature)", "“Chile Relleno” Empanadas $10", "Cauliflower Tacos $10", "Basil Gimlet $10", "Hot Tropics $10"],
+    pickTotal: "5 items ≈ $50 + tax and a 20% tip ≈ $64 (leaves about $6 of the $70)",
+    tip: "Want to splurge? “The Dirty Lil Secret” (mini dirty martini with truffle fries) is $24 — it would need a swap or a cushion dip.",
   },
   {
     id: "tao",
@@ -1030,9 +1044,14 @@ export const EATERIES: Eatery[] = [
     address: "3355 S Las Vegas Blvd, Las Vegas, NV 89109",
     blurb: "Our anniversary dinner. Statues, candlelight and a sweet toast. Check that Social Hour pricing still applies at 8:30.",
     socialUrl: "https://taogroup.com/venues/tao-asian-bistro-las-vegas/social-hour/",
-    menuUrl: "https://taogroup.com/venues/tao-asian-bistro-las-vegas/social-hour/",
+    menuUrl: "https://taogroup.com/venues/tao-asian-bistro-las-vegas/menu/",
     menuLabel: "Social hour menu",
     confirmId: "tao-hours",
+    verified: "Social Hour: Sun–Wed, 8:30–10 PM, at the bar and lounge. Bites, two cocktails and sake/wine are $10 each.",
+    caveat: "TAO lists a Veterans Day event on its site (11/11 is Veterans Day). Check it doesn’t change Social Hour.",
+    picks: ["Spicy Tuna Tartare on Crispy Rice $10", "Dumplings (gyoza, potsticker, veggie) $10", "Thai Chicken Wing Lollipops $10", "Avocado Cucumber Roll $10", "Banana Pudding to share $10", "Sparkling wine, one glass each $20"],
+    pickTotal: "7 items ≈ $70 + tax and a 20% tip ≈ $90, about $5 over. Drop the roll for ≈ $77",
+    tip: "Six items fits your $85 with a few dollars to spare. If you’re still hungry, split one more $10 plate and take the extra from the cushion.",
   },
   {
     id: "lethai",
@@ -1040,13 +1059,17 @@ export const EATERIES: Eatery[] = [
     name: "Le Thai",
     cuisine: "Northern Thai · Fremont East",
     budget: 45,
-    slot: "Thu 11/12 · 4:00 – 5:00 PM",
+    slot: "Thu 11/12 · 4:00 – 5:15 PM",
     address: "523 Fremont St, Las Vegas, NV 89101",
     blurb: "Fiery, fragrant Thai on the Fremont East strip. Happy-hour plates first.",
     socialUrl: "https://lethaivegas.com/menu/",
     menuUrl: "https://lethaivegas.com/menu/",
     menuLabel: "Full menu",
     confirmId: "lethai-hours",
+    verified: "Happy Hour: Mon–Thu, 4–6 PM. Appetizers $10–$12, beers $3–$5, cocktails $6–$7.",
+    picks: ["Waterfall Beef $12", "Chicken Satay $10", "Spiked Thai Iced Tea ×2 $12"],
+    pickTotal: "≈ $34 + tax and tip ≈ $44. Swap a cocktail for a $5 beer (Singha, Chang) to save a little",
+    tip: "Happy hour is appetizers only. The famous Short Rib Fried Rice ($18) is on the regular menu, not at happy-hour pricing.",
   },
   {
     id: "park",
@@ -1054,13 +1077,18 @@ export const EATERIES: Eatery[] = [
     name: "Park on Fremont",
     cuisine: "Patio bar & bites · Fremont East",
     budget: 30,
-    slot: "Thu 11/12 · 5:15 – 6:15 PM",
+    slot: "Thu 11/12 · 5:45 – 6:45 PM",
     address: "506 Fremont St, Las Vegas, NV 89101",
     blurb: "Leafy patio, cocktails and a relaxed second-stop happy hour.",
     socialUrl: "https://www.parkonfremont.com/happy-hour",
-    menuUrl: "https://www.parkonfremont.com/happy-hour",
+    menuUrl: "https://www.parkonfremont.com/menu",
     menuLabel: "Happy hour",
     confirmId: "park-hours",
+    verified: "Happy Hour is posted as Wed–Fri, 5–7 PM, with discounted beers, food and well cocktails. Specific happy-hour prices aren’t published.",
+    caveat: "The site lists the kitchen as Wed–Fri 5–10 PM, but its opening-hours metadata says Wed/Thu open at 6 PM. We moved this stop to 5:45 PM so it works either way.",
+    picks: ["Share 6 wings $12 (regular price)", "Park Blonde draft ×2 at $10 each (regular price)"],
+    pickTotal: "≈ $32 at regular prices + tax and tip ≈ $41; happy-hour discounts should bring it toward your $30",
+    tip: "Ask for the happy-hour menu when you sit down. Burgers are $16–19 at regular price, so wings or onion rings ($10) are the best share.",
   },
 ];
 

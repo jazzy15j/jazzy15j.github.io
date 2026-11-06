@@ -65,6 +65,23 @@ function EateryCard({ e }: { e: Eatery }) {
         </p>
         <p className="text-[14.5px]">{e.blurb}</p>
 
+        {/* Verified info + what to order */}
+        <div className="rounded-xl border border-sage/50 bg-sage/10 px-3 py-2 text-[14px]">
+          <p className="lbl !text-sage">Verified on the venue’s site · Nov 6</p>
+          <p className="mt-1 font-semibold">{e.verified}</p>
+          {e.caveat ? <p className="mt-1 font-bold text-wine">⚠ {e.caveat}</p> : null}
+        </div>
+        <div className="rounded-xl bg-blush/50 px-3 py-2 text-[14px]">
+          <p className="lbl">Best things to order</p>
+          <ul className="mt-1 list-disc space-y-0.5 pl-5 font-semibold">
+            {e.picks.map((x) => (
+              <li key={x}>{x}</li>
+            ))}
+          </ul>
+          <p className="mt-1 font-extrabold text-burgundy">{e.pickTotal}</p>
+          {e.tip ? <p className="mt-1 text-ink-soft">{e.tip}</p> : null}
+        </div>
+
         {/* Happy-hour confirmation */}
         <div className={`rounded-xl border px-3 py-2 ${conf?.done ? "border-sage/50 bg-sage/10" : "border-gold/60 bg-gold-lt/25"}`}>
           <label className="flex items-start gap-3">
@@ -76,7 +93,7 @@ function EateryCard({ e }: { e: Eatery }) {
               aria-label={`${e.name} happy-hour times confirmed`}
             />
             <span className="text-[14px] font-bold leading-snug">
-              {conf?.done ? "Happy-hour days, times & prices confirmed" : "Unconfirmed — check the official page for current happy-hour days, times & prices before we go"}
+              {conf?.done ? "Happy-hour days, times & prices confirmed" : "Not confirmed yet — re-check the official page or call before we go"}
             </span>
           </label>
           <input
@@ -231,7 +248,7 @@ export default function Food() {
         <div className="flex gap-3 rounded-2xl border border-gold/60 bg-gold-lt/30 px-4 py-3">
           <Icon name="alert" className="mt-0.5 shrink-0 text-gold" />
           <p className="text-[14px] font-semibold">
-            <b>Happy-hour days and times are not verified in this app.</b> Each venue publishes its own schedule — tap “Happy hour” to read it, then record what you find. Prices shown are our budget, not menu prices.
+            <b>Happy-hour days and times were read from each venue’s own site on Nov 6, 2026.</b> Schedules can change, so re-check the day before. Park on Fremont still needs a quick call. Dollar figures in “Best things to order” are estimates with Las Vegas sales tax (about 8.4%) and a 20% tip — check each bill, since some venues add a service charge.
           </p>
         </div>
       ) : null}
