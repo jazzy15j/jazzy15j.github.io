@@ -248,7 +248,7 @@ export default function Food() {
         <div className="flex gap-3 rounded-2xl border border-gold/60 bg-gold-lt/30 px-4 py-3">
           <Icon name="alert" className="mt-0.5 shrink-0 text-gold" />
           <p className="text-[14px] font-semibold">
-            <b>Happy-hour days and times were read from each venue’s own site on Nov 6, 2026.</b> Schedules can change, so re-check the day before. Park on Fremont still needs a quick call. Dollar figures in “Best things to order” are estimates with Las Vegas sales tax (about 8.4%) and a 20% tip — check each bill, since some venues add a service charge.
+            <b>Happy-hour days and times were read from each venue’s own site on Nov 6, 2026.</b> Schedules can change, so re-check the day before. Park on Fremont still needs a quick call. “Best things to order” is planned alcohol-free; where a venue’s discounts only cover alcohol, the saved drink money goes to extra food. Dollar figures are estimates with Las Vegas sales tax (about 8.4%) and a 20% tip — check each bill, since some venues add a service charge.
           </p>
         </div>
       ) : null}
