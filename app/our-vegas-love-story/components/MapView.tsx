@@ -443,7 +443,7 @@ export default function MapView() {
             .
           </li>
           <li>
-            <b className="text-wine">Free trams.</b> A free tram links Park MGM ↔ Aria/Crystals ↔ Bellagio — handy for Tuesday. Confirm it’s running that day.
+            <b className="text-wine">Free trams.</b> A free tram links Park MGM ↔ Aria ↔ Bellagio — handy for Tuesday. Confirm it’s running that day.
           </li>
           <li>
             <b className="text-wine">Planet 13 shuttle.</b> Free from New York-New York — times unconfirmed. Backup: taxi or rideshare from the $50 backup fund.
