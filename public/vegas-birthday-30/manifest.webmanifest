@@ -1,0 +1,18 @@
+{
+  "name": "Thirty & Sparkling — Jasmine's 30th in Las Vegas",
+  "short_name": "Thirty & Sparkling",
+  "description": "Jasmine's 30th-birthday trip to Las Vegas, Dec 14–18, 2026.",
+  "id": "/vegas-birthday-30",
+  "start_url": "/vegas-birthday-30",
+  "scope": "/vegas-birthday-30",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0c2a22",
+  "theme_color": "#123d31",
+  "icons": [
+    { "src": "/vegas-birthday-30/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/vegas-birthday-30/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/vegas-birthday-30/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/vegas-birthday-30/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

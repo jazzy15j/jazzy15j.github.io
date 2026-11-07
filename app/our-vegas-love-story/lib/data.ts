@@ -383,15 +383,15 @@ export const STOPS: Stop[] = [
     confirm: [c("pool-open", "Is the pool open (and heated)? Hours in November are unconfirmed — ask the front desk.")],
   },
   {
-    id: "tue-conservatory",
+    id: "tue-glass",
     day: 1,
     time: "1:30 PM",
     start: 13 * 60 + 30,
-    title: "Bellagio Conservatory & Gardens",
+    title: "Bellagio Lobby Glass Ceiling",
     kind: "free",
     blurb:
-      "A free indoor garden of towering flowers, trees and seasonal sculptures — no shopping, just something beautiful to wander through together.",
-    place: "Bellagio Conservatory & Botanical Gardens",
+      "Free art, no shopping: the Bellagio's hand-blown glass flower ceiling by Dale Chihuly, plus the grand lobby. (The Conservatory gardens are between displays and closed Nov 8–13, so we'll see them on the December trip.)",
+    place: "Bellagio Lobby (Fiori di Como glass ceiling)",
     address: "3600 S Las Vegas Blvd, Las Vegas, NV 89109",
     url: "https://bellagio.mgmresorts.com/",
     urlLabel: "Bellagio site",
@@ -410,8 +410,8 @@ export const STOPS: Stop[] = [
     },
     confirm: [c("tram", "Free Park MGM ↔ Aria ↔ Bellagio tram: confirm it's running that day.")],
     tips: [
-      "Free to walk in — the display changes with the season. It's right next to the lake where the fountains play tonight.",
-      "Photos are welcome; it gets busy, so go a little early.",
+      "The glass ceiling is in the main lobby and free to look at — no need to gamble or buy anything.",
+      "It's right next to the lake where the fountains play tonight.",
     ],
   },
   {
@@ -1012,9 +1012,10 @@ export const EATERIES: Eatery[] = [
     menuLabel: "Social hour menu",
     confirmId: "hakkasan-hours",
     verified: "Social Hour: Mon–Wed, 5–7 PM, at the bar only. Bites, dim sum, two specialty cocktails and select wine/sake are all $10 each.",
-    picks: ["Hakka Basket dim sum (king crab, shumai, truffle mushroom) $10", "Glazed Duroc Pork Belly Buns $10", "Drunken Wonton $10", "Hot Tropics cocktail $10", "Hakkasan Mule $10"],
-    pickTotal: "5 items ≈ $50 + tax and a 20% tip ≈ $64",
-    tip: "Seats are at the bar and first-come, so arrive right at 6:00. Swap a cocktail for a $10 glass of sparkling if you want a toast.",
+    picks: ["Hakka Basket dim sum (king crab, shumai, truffle mushroom) $10", "Glazed Duroc Pork Belly Buns $10", "Drunken Wonton $10", "Salt & Pepper Calamari $10", "Chicken Pot Sticker $10"],
+    pickTotal: "5 plates ≈ $50 + tax and a 20% tip ≈ $64. No alcohol: the money that would have gone to a cocktail goes to food",
+    tip: "Water is free. Social Hour only discounts alcohol, so zero-proof drinks are full price ($16 cocktails, $12 juice blends). If your partner wants a cocktail, swap one plate for a $10 Hakkasan Mule or Hot Tropics.",
+
   },
   {
     id: "beauty",
@@ -1030,9 +1031,10 @@ export const EATERIES: Eatery[] = [
     menuLabel: "Social hour menu",
     confirmId: "beauty-hours",
     verified: "Social Hour: Sun–Thu, 5–7 PM, at the bar. Light bites, two cocktails and select wine are $10 each.",
-    picks: ["Grilled Cheese & Tomato Soup Dumplings $10 (their signature)", "“Chile Relleno” Empanadas $10", "Cauliflower Tacos $10", "Basil Gimlet $10", "Hot Tropics $10"],
-    pickTotal: "5 items ≈ $50 + tax and a 20% tip ≈ $64 (leaves about $6 of the $70)",
-    tip: "Want to splurge? “The Dirty Lil Secret” (mini dirty martini with truffle fries) is $24 — it would need a swap or a cushion dip.",
+    picks: ["Grilled Cheese & Tomato Soup Dumplings $10 (their signature)", "“Chile Relleno” Empanadas $10", "Cauliflower Tacos $10", "Crispy Panko Vidalia Onion Rings $10", "BBQ Fries $10"],
+    pickTotal: "5 plates ≈ $50 + tax and a 20% tip ≈ $64 (about $6 left of the $70)",
+    tip: "For a treat, the spirit-free Garnet Gimlet (strawberry, lime, ginger ale) is $14 at full price — roughly $18 with tax and tip, which swaps in for one plate. Partner cocktail: Basil Gimlet or Hot Tropics, $10.",
+
   },
   {
     id: "tao",
@@ -1049,9 +1051,10 @@ export const EATERIES: Eatery[] = [
     confirmId: "tao-hours",
     verified: "Social Hour: Sun–Wed, 8:30–10 PM, at the bar and lounge. Bites, two cocktails and sake/wine are $10 each.",
     caveat: "TAO lists a Veterans Day event on its site (11/11 is Veterans Day). Check it doesn’t change Social Hour.",
-    picks: ["Spicy Tuna Tartare on Crispy Rice $10", "Dumplings (gyoza, potsticker, veggie) $10", "Thai Chicken Wing Lollipops $10", "Avocado Cucumber Roll $10", "Banana Pudding to share $10", "Sparkling wine, one glass each $20"],
-    pickTotal: "7 items ≈ $70 + tax and a 20% tip ≈ $90, about $5 over. Drop the roll for ≈ $77",
-    tip: "Six items fits your $85 with a few dollars to spare. If you’re still hungry, split one more $10 plate and take the extra from the cushion.",
+    picks: ["Spicy Tuna Tartare on Crispy Rice $10", "Dumplings (gyoza, potsticker, veggie) $10", "Thai Chicken Wing Lollipops $10", "Avocado Cucumber Roll $10", "Banana Pudding to share $10", "Zhen Bang zero-proof cocktail (raspberry, lime, agave, club soda) $14"],
+    pickTotal: "5 plates ≈ $50 + the $14 zero-proof ≈ $64 before tax and tip ≈ $82 total, inside your $85",
+    tip: "Zhen Bang is a full-price non-alcoholic drink for the anniversary toast. TAO also has a tea menu. If your partner wants a cocktail, a $10 Basil Gimlet or sparkling glass would take you about $13 over; drop a plate to compensate.",
+
   },
   {
     id: "lethai",
@@ -1067,9 +1070,10 @@ export const EATERIES: Eatery[] = [
     menuLabel: "Full menu",
     confirmId: "lethai-hours",
     verified: "Happy Hour: Mon–Thu, 4–6 PM. Appetizers $10–$12, beers $3–$5, cocktails $6–$7.",
-    picks: ["Waterfall Beef $12", "Chicken Satay $10", "Spiked Thai Iced Tea ×2 $12"],
-    pickTotal: "≈ $34 + tax and tip ≈ $44. Swap a cocktail for a $5 beer (Singha, Chang) to save a little",
-    tip: "Happy hour is appetizers only. The famous Short Rib Fried Rice ($18) is on the regular menu, not at happy-hour pricing.",
+    picks: ["Waterfall Beef $12", "Chicken Satay $10", "Pork Jerky $10", "Thai Iced Tea $3"],
+    pickTotal: "≈ $35 + tax and tip ≈ $45",
+    tip: "Thai Iced Tea and Thai Iced Coffee are $3, and fountain sodas $3.50. Happy hour is appetizers only. If your partner wants a $5 beer, it adds about $6.",
+
   },
   {
     id: "park",
@@ -1086,9 +1090,10 @@ export const EATERIES: Eatery[] = [
     confirmId: "park-hours",
     verified: "Happy Hour is posted as Wed–Fri, 5–7 PM, with discounted beers, food and well cocktails. Specific happy-hour prices aren’t published.",
     caveat: "The site lists the kitchen as Wed–Fri 5–10 PM, but its opening-hours metadata says Wed/Thu open at 6 PM. We moved this stop to 5:45 PM so it works either way.",
-    picks: ["Share 6 wings $12 (regular price)", "Park Blonde draft ×2 at $10 each (regular price)"],
-    pickTotal: "≈ $32 at regular prices + tax and tip ≈ $41; happy-hour discounts should bring it toward your $30",
-    tip: "Ask for the happy-hour menu when you sit down. Burgers are $16–19 at regular price, so wings or onion rings ($10) are the best share.",
+    picks: ["Share 6 wings $12 (regular price)", "Onion Rings $10 (regular price)", "Soda $3 (no-alcohol drink)"],
+    pickTotal: "≈ $25 at regular prices + tax and tip ≈ $32; happy-hour discounts should bring it under your $30",
+    tip: "Non-alcoholic choices include sodas ($3), juices, iced tea or coffee ($5), Heineken Zero ($11) and Aqua Panna. If your partner wants a draft beer, it's $10–13 at regular price. Ask for the happy-hour menu.",
+
   },
 ];
 
@@ -1139,7 +1144,7 @@ export const STAMPS: StampDef[] = [
   { id: "hakkasan", name: "Hakkasan", icon: "cocktail", top: "HAKKASAN" },
   { id: "stocked", name: "Stocked Up", icon: "cart", top: "INSTACART" },
   { id: "splash", name: "Splash", icon: "wave", top: "POOL DAY" },
-  { id: "conservatory", name: "Conservatory", icon: "flower", top: "BELLAGIO GARDENS" },
+  { id: "conservatory", name: "Glass Ceiling", icon: "chandelier", top: "BELLAGIO LOBBY" },
   { id: "cosmo", name: "Cosmopolitan", icon: "chandelier", top: "THE COSMOPOLITAN" },
   { id: "beauty", name: "Beauty & Essex", icon: "cocktail", top: "BEAUTY & ESSEX" },
   { id: "fountains", name: "Bellagio", icon: "fountain", top: "BELLAGIO FOUNTAINS" },
