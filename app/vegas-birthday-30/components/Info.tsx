@@ -82,7 +82,7 @@ export function Countdown({ tone = "light" }: { tone?: "light" | "dark" }) {
         {cell(cd.mins, "min")}
         {cell(cd.secs, "sec")}
       </div>
-      <p className="mt-2 text-center text-xs font-bold text-[#f0d9a6]">until check-in opens · Mon 12/14, 4:00 PM</p>
+      <p className="mt-2 text-center text-xs font-bold text-[#f0d9a6]">until we touch down at LAS · Mon 12/14, 9:43 PM</p>
     </div>
   );
 }

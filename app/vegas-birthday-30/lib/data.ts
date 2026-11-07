@@ -12,10 +12,10 @@ export const HOTEL = {
 };
 
 export const TRIP_TZ = "America/Los_Angeles";
-/** Check-in opens 4:00 PM PST on Mon 12/14/2026 (UTC-8). */
-export const TRIP_START_UTC = Date.UTC(2026, 11, 15, 0, 0, 0);
-/** Checkout is by 10:00 AM PST on Fri 12/18/2026. */
-export const TRIP_END_UTC = Date.UTC(2026, 11, 18, 18, 0, 0);
+/** Wheels down at LAS, 9:43 PM PST on Mon 12/14/2026 (UTC-8). */
+export const TRIP_START_UTC = Date.UTC(2026, 11, 15, 5, 43, 0);
+/** Flight home leaves 11:57 AM PST on Fri 12/18/2026. */
+export const TRIP_END_UTC = Date.UTC(2026, 11, 18, 19, 57, 0);
 export const LV = { lat: 36.1147, lng: -115.1728 };
 
 export interface DayInfo {
@@ -153,11 +153,12 @@ export const STOPS: Stop[] = [
   {
     id: "mon-land",
     day: 0,
-    time: "Afternoon (add your flight)",
-    start: 13 * 60,
+    time: "9:43 PM",
+    start: 21 * 60 + 43,
     title: "Touchdown at LAS",
     kind: "arrive",
-    blurb: "Wheels down for the 30th-birthday trip! Grab the bags and let the Christmas sparkle begin.",
+    blurb:
+      "Flight 40 leaves Grand Island (GRI) at 8:58 PM Central and lands at 9:43 PM Pacific. Wheels down for the 30th-birthday trip — the lights will wait for tomorrow.",
     place: "Harry Reid International Airport",
     address: "5757 Wayne Newton Blvd, Las Vegas, NV 89119",
     url: "https://www.harryreidairport.com/",
@@ -169,16 +170,19 @@ export const STOPS: Stop[] = [
     category: null,
     method: "cash",
     stamp: "touchdown",
-    confirm: [c("flight-in", "Your arrival flight time — check-in opens at 4:00 PM, so plan what to do if you land early.")],
+    tips: [
+      "Eat before you fly or grab something at the airport — everything else is closed by the time you reach the suite.",
+      "Flight check-in opens 8:58 PM Sunday 12/13.",
+    ],
   },
   {
     id: "mon-ride",
     day: 0,
-    time: "3:00 PM",
-    start: 15 * 60,
+    time: "10:15 PM",
+    start: 22 * 60 + 15,
     title: "Rideshare to the resort",
     kind: "ride",
-    blurb: "A short ride from the airport to the suite, about 15–25 minutes.",
+    blurb: "A late-night ride to the suite, about 15–25 minutes depending on bags and the pickup line.",
     place: HOTEL_PLACE,
     address: HOTEL.address,
     lat: HOTEL.lat,
@@ -197,12 +201,12 @@ export const STOPS: Stop[] = [
   {
     id: "mon-checkin",
     day: 0,
-    time: "4:00 PM",
-    start: 16 * 60,
-    title: "Check in at the resort",
+    time: "10:30 PM",
+    start: 22 * 60 + 30,
+    title: "Late check-in at the resort",
     kind: "hotel",
     blurb:
-      "Our home base: a one-bedroom king suite with a sofa bed, full kitchen, washer and dryer, balcony and living area. The booking is under Jasmine Stock, 2 adults.",
+      "Our home base: a one-bedroom king suite with a sofa bed, full kitchen, washer and dryer, balcony and living area. The booking is under Jasmine Stock, 2 adults. Straight to bed after a long travel day.",
     place: HOTEL_PLACE,
     address: HOTEL.address,
     url: "https://www.hiltongrandvacations.com/en/resorts-and-destinations/las-vegas/desert-paradise-resort",
@@ -214,20 +218,28 @@ export const STOPS: Stop[] = [
     method: "card",
     stamp: "homebase",
     tips: [
-      "Booked Dec 14–18 through Booking.com ($364.90, already paid). Check-in from 4:00 PM, checkout by 10:00 AM.",
-      "The resort has no restaurant, so the kitchen and grocery delivery are our friends.",
+      "Booked Dec 14–18 through Booking.com ($364.90, already paid). Normal check-in is from 4:00 PM, checkout by 10:00 AM.",
+      "The resort has no restaurant, so groceries get delivered Tuesday morning.",
       "Resort phone (listed on its official page): 702-579-3600.",
     ],
-    confirm: [c("incidentals", "Does the resort place an incidentals/security hold at check-in? Log it in Budget → Hotel & holds.")],
+    confirm: [
+      c(
+        "late-checkin",
+        "You arrive about 10:30 PM. Call the resort (702-579-3600) to confirm the front desk is staffed that late and how late-arrival check-in works.",
+      ),
+      c("incidentals", "Does the resort place an incidentals/security hold at check-in? Log it in Budget → Hotel & holds."),
+    ],
   },
+
+  /* -------------------------- Tuesday 12/15 ------------------------- */
   {
-    id: "mon-groceries",
-    day: 0,
-    time: "6:00 PM",
-    start: 18 * 60,
+    id: "tue-groceries",
+    day: 1,
+    time: "9:30 AM",
+    start: 9 * 60 + 30,
     title: "Grocery delivery to the suite",
     kind: "grocery",
-    blurb: "Breakfast, snacks and drinks delivered so the kitchen works for us all week. Paid by card.",
+    blurb: "Breakfast, snacks and drinks delivered so the kitchen works for us all week. Order it Monday while you travel so the delivery window is ready. Paid by card.",
     place: HOTEL_PLACE,
     address: HOTEL.address,
     url: "https://www.instacart.com/",
@@ -241,13 +253,13 @@ export const STOPS: Stop[] = [
     tips: ["Track what arrives in Tools → Grocery inventory."],
   },
   {
-    id: "mon-cozy",
-    day: 0,
-    time: "7:30 PM",
-    start: 19 * 60 + 30,
-    title: "Cozy dinner in the suite",
+    id: "tue-cozy",
+    day: 1,
+    time: "10:30 AM",
+    start: 10 * 60 + 30,
+    title: "Cozy first morning in the suite",
     kind: "free",
-    blurb: "A quiet first night: cook something simple from the groceries, put on a holiday movie and rest up for the lights.",
+    blurb: "Sleep in after the late flight, cook breakfast in your own kitchen and enjoy the balcony before the lights.",
     place: HOTEL_PLACE,
     address: HOTEL.address,
     lat: HOTEL.lat,
@@ -257,8 +269,6 @@ export const STOPS: Stop[] = [
     method: "card",
     stamp: "cozy",
   },
-
-  /* -------------------------- Tuesday 12/15 ------------------------- */
   {
     id: "tue-ride",
     day: 1,
@@ -747,11 +757,11 @@ export const STOPS: Stop[] = [
   {
     id: "fri-checkout",
     day: 4,
-    time: "By 10:00 AM",
-    start: 9 * 60 + 30,
-    title: "Check out",
+    time: "8:30 AM",
+    start: 8 * 60 + 30,
+    title: "Pack up & check out",
     kind: "hotel",
-    blurb: "Pack up the kitchen suite. Checkout is by 10:00 AM.",
+    blurb: "Pack up the kitchen suite and leave early for the airport. Checkout is by 10:00 AM but your flight is at 11:57 AM.",
     place: HOTEL_PLACE,
     address: HOTEL.address,
     lat: HOTEL.lat,
@@ -760,19 +770,18 @@ export const STOPS: Stop[] = [
     category: null,
     method: "card",
     tips: [
-      "If your flight is later, ask the front desk whether they’ll hold bags.",
+      "Pack the night before (Thursday after Fremont) so the morning is easy.",
       "Check your card statement for any incidentals hold release.",
     ],
-    confirm: [c("flight-out", "Your departure flight time, so we can plan the morning and the ride to the airport.")],
   },
   {
     id: "fri-ride",
     day: 4,
-    time: "Per your flight",
-    start: 10 * 60,
+    time: "9:00 AM",
+    start: 9 * 60,
     title: "Rideshare to the airport",
     kind: "ride",
-    blurb: "Back to LAS, about 15–25 minutes.",
+    blurb: "Back to LAS in time for a relaxed arrival about 2½ hours before takeoff.",
     place: "Harry Reid International Airport",
     address: "5757 Wayne Newton Blvd, Las Vegas, NV 89119",
     lat: 36.084,
@@ -784,17 +793,17 @@ export const STOPS: Stop[] = [
       mode: "taxi",
       distance: "~6 mi",
       time: "15–25 min",
-      how: "Request a rideshare to your airline’s terminal, leaving about 2 hours before the flight.",
+      how: "Request a rideshare to your airline’s terminal. Morning traffic and the drop-off line can add time.",
     },
   },
   {
     id: "fri-flight",
     day: 4,
-    time: "Per your flight",
-    start: 11 * 60,
-    title: "Flight home",
+    time: "11:57 AM",
+    start: 11 * 60 + 57,
+    title: "Flight home to Grand Island",
     kind: "depart",
-    blurb: "Safe travels, birthday girl. Vegas will keep the lights on.",
+    blurb: "Flight 95 leaves LAS at 11:57 AM Pacific and lands at Grand Island (GRI) at 4:21 PM Central. Safe travels, birthday girl. Vegas will keep the lights on.",
     place: "Harry Reid International Airport",
     address: "5757 Wayne Newton Blvd, Las Vegas, NV 89119",
     url: "https://www.harryreidairport.com/",
@@ -806,6 +815,7 @@ export const STOPS: Stop[] = [
     category: null,
     method: "card",
     stamp: "homeward",
+    tips: ["Flight check-in opens 11:57 AM Thursday 12/17 — a good reminder to check in from your phone."],
   },
 ];
 
