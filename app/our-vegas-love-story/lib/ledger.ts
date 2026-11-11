@@ -6,10 +6,12 @@ import type { AppState, Extra, StopState } from "./types";
  * version to anyone's saved data, replacing only these entries (ids start with "led-")
  * and the stop actuals listed here. Anything else you add yourself is left alone.
  */
-export const LEDGER_VERSION = 3;
+export const LEDGER_VERSION = 4;
 
 // 488 = $450 in hand + $38 that turned up in the cash count and could not be matched to a purchase.
-export const LEDGER_SETTINGS = { cashInHand: 488, atmPlanned: 350, atmDone: true };
+// Limit is $900: the original $800 plus a $100 anniversary Venmo gift, added to the cushion envelope.
+export const LEDGER_SETTINGS = { limit: 900, cashInHand: 488, atmPlanned: 350, atmDone: true };
+export const LEDGER_ALLOC = { cushion: 297 };
 
 const st = (actual: number, method: "cash" | "card", notes = ""): Partial<StopState> => ({ actual, method, notes });
 
@@ -75,7 +77,7 @@ export function applyLedger(s: AppState): AppState {
     ...s,
     stops,
     extras: [...s.extras.filter((e) => !e.id.startsWith("led-") && !LEGACY_IDS.has(e.id)), ...LEDGER_EXTRAS],
-    settings: { ...s.settings, ...LEDGER_SETTINGS },
+    settings: { ...s.settings, ...LEDGER_SETTINGS, alloc: { ...s.settings.alloc, ...LEDGER_ALLOC } },
     ledgerV: LEDGER_VERSION,
   };
 }

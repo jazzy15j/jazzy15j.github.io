@@ -45,7 +45,7 @@ function Hero() {
             style={{ border: 0, color: "inherit" }}
             onClick={() => setTab("budget")}
           >
-            <span className="lbl !text-[#f0d9a6]">Left of $800</span>
+            <span className="lbl !text-[#f0d9a6]">Left of {fmt(totals.limit)}</span>
             <span className="font-display num block text-2xl font-extrabold text-[#ffe9b0]">{fmt(totals.leftUnderLimit)}</span>
           </button>
           <button
