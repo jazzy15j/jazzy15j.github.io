@@ -138,6 +138,8 @@ export interface Settings {
 
 export interface AppState {
   v: 1;
+  /** Which version of the shared spending ledger has been applied. */
+  ledgerV?: number;
   stops: Record<string, StopState>;
   extras: Extra[];
   settings: Settings;

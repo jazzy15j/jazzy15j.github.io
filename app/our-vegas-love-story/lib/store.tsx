@@ -2,6 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { DEFAULT_GROCERIES, DEFAULT_PACKING, DEFAULT_SETTINGS, STOPS } from "./data";
+import { LEDGER_VERSION, applyLedger } from "./ledger";
 import { computeTotals, type Totals } from "./money";
 import type { AppState, Extra, FoodLog, GroceryItem, Method, PackItem, Settings, StopState } from "./types";
 
@@ -12,7 +13,7 @@ export const uid = (p = "x"): string => `${p}-${Math.random().toString(36).slice
 function freshState(): AppState {
   const stops: Record<string, StopState> = {};
   for (const s of STOPS) stops[s.id] = { actual: null, method: s.method, notes: "", done: false };
-  return {
+  return applyLedger({
     v: 1,
     stops,
     extras: [],
@@ -28,7 +29,7 @@ function freshState(): AppState {
     },
     notes: "",
     dayNotes: {},
-  };
+  });
 }
 
 /** Merge saved data over fresh defaults so new fields/stops never break old saves. */
@@ -38,7 +39,7 @@ function hydrate(raw: unknown): AppState {
   const r = raw as Partial<AppState>;
   const stops = { ...base.stops };
   for (const [id, st] of Object.entries(r.stops ?? {})) if (id in stops) stops[id] = { ...stops[id], ...st };
-  return {
+  const merged: AppState = {
     ...base,
     ...r,
     v: 1,
@@ -57,6 +58,8 @@ function hydrate(raw: unknown): AppState {
     notes: r.notes ?? "",
     dayNotes: r.dayNotes ?? {},
   };
+  // Apply the shared spending ledger once per version.
+  return (r.ledgerV ?? 0) < LEDGER_VERSION ? applyLedger(merged) : merged;
 }
 
 export interface Toast {
