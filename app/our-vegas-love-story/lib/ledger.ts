@@ -6,7 +6,7 @@ import type { AppState, Extra, StopState } from "./types";
  * version to anyone's saved data, replacing only these entries (ids start with "led-")
  * and the stop actuals listed here. Anything else you add yourself is left alone.
  */
-export const LEDGER_VERSION = 2;
+export const LEDGER_VERSION = 3;
 
 // 488 = $450 in hand + $38 that turned up in the cash count and could not be matched to a purchase.
 export const LEDGER_SETTINGS = { cashInHand: 488, atmPlanned: 350, atmDone: true };
@@ -23,7 +23,7 @@ export const LEDGER_STOPS: Record<string, Partial<StopState>> = {
   "tue-alexxas": st(43, "cash", "Two drinks plus tip."),
   "tue-beauty": st(40, "card", "Food, with tip."),
   "tue-brewdog": st(0, "cash", "Skipped — went to Alexxa's instead."),
-  "tue-cvs": st(20, "card", "Corona and salsa — estimate until the receipt."),
+  "tue-cvs": st(24, "card", "Corona and salsa."),
 };
 
 const ex = (
