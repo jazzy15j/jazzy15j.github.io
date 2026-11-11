@@ -47,7 +47,7 @@ function Summary() {
   const pct = Math.round((t.spent / t.limit) * 100);
   const msg =
     t.spent > t.limit
-      ? "Over the $800 limit — time to pause the splurging."
+      ? `Over the ${fmt(t.limit)} limit — time to pause the splurging.`
       : t.projected > t.limit
         ? "Projected to pass the limit. Skip an extra or use less backup."
         : t.spent === 0
@@ -105,7 +105,7 @@ function CashCard() {
             <Icon name="card" size={16} /> On card
           </div>
           <div className="font-display num text-[28px] font-extrabold leading-tight text-burgundy">{fmt(t.cardSpent)}</div>
-          <div className="text-[12px] text-ink-soft">{t.cardPlanned > 0 ? `+ ${fmt(t.cardPlanned)} still planned` : "Counts toward the $800"}</div>
+          <div className="text-[12px] text-ink-soft">{t.cardPlanned > 0 ? `+ ${fmt(t.cardPlanned)} still planned` : `Counts toward the ${fmt(t.limit)}`}</div>
         </div>
       </div>
 
@@ -264,7 +264,7 @@ function Deposit() {
   return (
     <section className="card relative overflow-hidden p-4" aria-label="Hotel deposit">
       <div className="absolute -right-8 top-3 rotate-12 rounded border-2 border-dashed border-wine/50 px-6 py-0.5 text-[11px] font-extrabold uppercase tracking-widest text-wine/70">
-        not in the $800
+        not in the budget
       </div>
       <h2 className="font-display text-xl font-extrabold text-burgundy">Hotel security deposit</h2>
       <p className="text-[13.5px] text-ink-soft">Refundable hold at The Signature — tracked separately from spending.</p>
@@ -464,15 +464,16 @@ export default function Budget() {
       <Collapse title="How the math works" icon="star">
         <ul className="list-disc space-y-1.5 pl-5 text-[14px]">
           <li>
-            <b>Spent</b> = every Actual Spent entered on a stop + every add-on expense. Cash and card both count toward the $800.
+            <b>Spent</b> = every Actual Spent entered on a stop + every add-on expense. Cash and card both count toward the trip budget.
           </li>
           <li>
             <b>Projected finish</b> uses the actual when entered, otherwise the stop’s estimate.
           </li>
           <li>
-            <b>Cushion left</b> = $197 minus anything logged to the cushion minus any category that went over its envelope.
+            <b>Cushion left</b> = the cushion envelope minus anything logged to the cushion minus any category that went over its envelope.
           </li>
-          <li>The $300 hotel hold is tracked separately and never reduces the $800.</li>
+          <li>The $300 hotel hold is tracked separately and never reduces the budget.</li>
+          <li>A $100 anniversary Venmo gift raised the trip ceiling from $800 to $900 and covers part of the card spending.</li>
         </ul>
       </Collapse>
     </div>

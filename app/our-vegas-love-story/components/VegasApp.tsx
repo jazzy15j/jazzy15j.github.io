@@ -170,7 +170,7 @@ function Shell() {
             className="flex shrink-0 flex-col items-end rounded-xl px-2 py-1"
             style={{ background: "rgba(255,255,255,0.1)", border: 0, color: "#ffe9b0", minHeight: 44 }}
             onClick={() => setTab("budget")}
-            aria-label={`${fmt(left)} left of the eight hundred dollar budget. Open budget.`}
+            aria-label={`${fmt(left)} left of the trip budget. Open budget.`}
           >
             <span className="font-display num text-[17px] font-extrabold leading-none">{fmt(left)}</span>
             <span className="text-[10px] font-extrabold uppercase tracking-wider opacity-80">left{ready ? (saved ? " ✓" : " …") : ""}</span>
