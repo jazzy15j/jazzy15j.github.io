@@ -6,7 +6,7 @@ import type { AppState, Extra, StopState } from "./types";
  * version to anyone's saved data, replacing only these entries (ids start with "led-")
  * and the stop actuals listed here. Anything else you add yourself is left alone.
  */
-export const LEDGER_VERSION = 7;
+export const LEDGER_VERSION = 8;
 
 // 488 = $450 in hand + $38 that turned up in the cash count and could not be matched to a purchase.
 // Limit is $900: the original $800 plus a $100 anniversary Venmo gift, added to the cushion envelope.
@@ -57,6 +57,8 @@ export const LEDGER_EXTRAS: Extra[] = [
   ex("gamble2", "Casino (net so far — up)", -38, "cash", "cushion", "2026-11-12T07:00:00.000Z", "About $100 in, $138 in chips (not cashed out yet)"),
   ex("pop2", "Pop", 4, "card", "restaurants", "2026-11-13T01:00:00.000Z"),
   ex("tap", "Last supper at Tap (with tip)", 78, "cash", "restaurants", "2026-11-13T03:00:00.000Z", "$73 + $5 tip"),
+  ex("airport1", "Airport water and coffee (estimate)", 10, "card", "restaurants", "2026-11-13T12:00:00.000Z", "Estimate until the receipt"),
+  ex("airport2", "Airport donuts and croissant", 14, "card", "restaurants", "2026-11-13T12:10:00.000Z"),
   ex("evefood", "Burger, fries, beer, vodka drink, 2 coffees, quesadilla (with tip)", 50, "card", "restaurants", "2026-11-11T02:30:00.000Z"),
 ];
 
