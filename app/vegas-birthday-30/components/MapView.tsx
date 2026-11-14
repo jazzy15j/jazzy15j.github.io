@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { DAYS, HOTEL, stopsForDay } from "../lib/data";
+import { DAYS, HOTEL, LV, stopsForDay } from "../lib/data";
 import { mapsDayRouteUrl, mapsDirUrl, mapsPlaceUrl, modeFor } from "../lib/geo";
 import { fmt } from "../lib/money";
 import { useStore } from "../lib/store";
@@ -106,26 +106,28 @@ function IllustratedMap({
   allStops,
 }: {
   stops: Stop[];
-  region: "strip" | "downtown";
+  region: "strip" | "downtown" | "desert";
   selected: string | null;
   onSelect: (id: string) => void;
   allStops: Stop[];
 }) {
   const pts: LL[] = stops.map((s) => [s.lat, s.lng]);
+  if (region === "desert") pts.push([HOTEL.lat, HOTEL.lng], [LV.lat, LV.lng]);
   if (region === "strip") {
     // keep the monorail visible when we're riding it
     if (stops.some((s) => s.id === "wed-monorail" || s.id === "wed-return")) pts.push(MONORAIL[0].at, MONORAIL[3].at);
   }
   const p = useMemo(() => fit(pts), [stops, region]); // eslint-disable-line react-hooks/exhaustive-deps
   const clusters = cluster(stops, p);
-  const route = clusters.map((c) => `${c.x.toFixed(1)},${c.y.toFixed(1)}`).join(" ");
+  const hotelXY = `${p.x(HOTEL.lng).toFixed(1)},${p.y(HOTEL.lat).toFixed(1)}`;
+  const route = (region === "desert" ? [hotelXY] : []).concat(clusters.map((c) => `${c.x.toFixed(1)},${c.y.toFixed(1)}`)).join(" ");
   const strip = STRIP.map(([la, ln]) => `${p.x(ln).toFixed(1)},${p.y(la).toFixed(1)}`).join(" ");
   const rail = MONORAIL.map((m) => `${p.x(m.at[1]).toFixed(1)},${p.y(m.at[0]).toFixed(1)}`).join(" ");
   const showRail = false; // no monorail on this trip
 
   return (
     <div className="relative overflow-hidden rounded-[20px] border-[3px] border-gold bg-[#f1e2bd] shadow-inner">
-      <svg viewBox={`0 0 ${W} ${H}`} className="block w-full" role="group" aria-label={`Illustrated ${region === "strip" ? "Las Vegas Strip" : "Fremont Street"} map`}>
+      <svg viewBox={`0 0 ${W} ${H}`} className="block w-full" role="group" aria-label={`Illustrated ${region === "strip" ? "Las Vegas Strip" : region === "desert" ? "desert drive" : "Fremont Street"} map`}>
         <defs>
           <pattern id={`grid-${region}`} width="30" height="30" patternUnits="userSpaceOnUse">
             <path d="M30 0H0V30" fill="none" stroke="rgba(122,96,77,0.14)" strokeWidth="1" />
@@ -163,6 +165,20 @@ function IllustratedMap({
                 </text>
               </g>
             ) : null}
+          </>
+        ) : region === "desert" ? (
+          <>
+            {/* Desert drive: resort + Las Vegas for orientation */}
+            <circle cx={p.x(LV.lng)} cy={p.y(LV.lat)} r="22" fill="#e9d6a3" opacity="0.7" />
+            <text x={p.x(LV.lng)} y={p.y(LV.lat) + 36} fontSize="8.5" textAnchor="middle" fontFamily="'Special Elite', serif" fill="#7a604d" letterSpacing="1.5">
+              LAS VEGAS
+            </text>
+            <g transform={`translate(${p.x(HOTEL.lng) - 9} ${p.y(HOTEL.lat) - 44})`}>
+              <rect width="18" height="14" rx="3" fill="#123d31" stroke="#fffaf0" strokeWidth="1.5" />
+              <text x="9" y="10.5" textAnchor="middle" fontSize="8" fontWeight="800" fill="#fdf1d6" fontFamily="'Nunito Sans', sans-serif">
+                RESORT
+              </text>
+            </g>
           </>
         ) : (
           <>
@@ -339,9 +355,13 @@ export default function MapView() {
   const stops = useMemo(() => stopsForDay(day), [day]);
   const allStops = useMemo(() => DAYS.flatMap((d) => stopsForDay(d.index)), []);
   const nearTown = (s: Stop) => s.lng > -115.2 && s.lng < -115.0;
+  const isDesert = (s: Stop) => s.lng < -115.25 || s.lng > -115.0 || s.lat < 36.0;
+  const atResort = (s: Stop) => s.lat === HOTEL.lat && s.lng === HOTEL.lng;
+  const hasDesert = stops.some(isDesert);
+  const desert = hasDesert ? stops.filter((s) => isDesert(s) || atResort(s)) : [];
   const strip = stops.filter((s) => nearTown(s) && s.lat < 36.15 && s.lat > 36.095);
-  const offMap = stops.filter((s) => !nearTown(s) || s.lat <= 36.095);
   const downtown = stops.filter((s) => nearTown(s) && s.lat >= 36.15);
+  const offMap = stops.filter((s) => !strip.includes(s) && !downtown.includes(s) && !desert.includes(s));
   const sel = stops.find((s) => s.id === selected) ?? null;
 
   return (
@@ -383,9 +403,15 @@ export default function MapView() {
         {strip.length ? (
           <IllustratedMap stops={strip} region="strip" selected={selected} onSelect={setSelected} allStops={allStops} />
         ) : null}
+        {desert.length ? (
+          <div className={strip.length ? "mt-3" : ""}>
+            <p className="lbl mb-1 px-1">Desert drive · from the resort</p>
+            <IllustratedMap stops={desert} region="desert" selected={selected} onSelect={setSelected} allStops={allStops} />
+          </div>
+        ) : null}
         {offMap.length ? (
           <p className="mt-2 rounded-xl bg-parchment/70 px-3 py-2 text-[13px] font-bold">
-            📍 Off the map (resort, airport or desert drives): {offMap.map((s) => s.title).join(" · ")} — use the route list below.
+            📍 Off the map (resort or airport): {offMap.map((s) => s.title).join(" · ")} — use the route list below.
           </p>
         ) : null}
         {downtown.length ? (
