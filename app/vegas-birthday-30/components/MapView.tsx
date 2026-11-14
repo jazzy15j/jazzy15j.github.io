@@ -196,7 +196,7 @@ function IllustratedMap({
 
         {/* Other days' pins, faint */}
         {allStops
-          .filter((s) => !stops.includes(s) && (region === "strip" ? s.lat < 36.15 : s.lat >= 36.15))
+          .filter((s) => !stops.includes(s) && s.lng > -115.2 && s.lng < -115.0 && (region === "strip" ? s.lat < 36.15 : s.lat >= 36.15))
           .map((s) => (
             <circle key={s.id} cx={p.x(s.lng)} cy={p.y(s.lat)} r="3" fill="#b3842f" opacity="0.45" />
           ))}
@@ -268,7 +268,7 @@ function IllustratedMap({
 /* Leg row                                                             */
 /* ------------------------------------------------------------------ */
 
-const MODE_ICON: Record<string, string> = { walk: "walk", transit: "bus", shuttle: "shuttle", taxi: "car", none: "walk" };
+const MODE_ICON: Record<string, string> = { walk: "walk", transit: "bus", shuttle: "shuttle", taxi: "car", car: "car", none: "walk" };
 
 function RouteList({ stops, selected, onSelect }: { stops: Stop[]; selected: string | null; onSelect: (id: string) => void }) {
   const { state } = useStore();
@@ -286,7 +286,7 @@ function RouteList({ stops, selected, onSelect }: { stops: Stop[]; selected: str
                 <div className="rounded-xl bg-parchment/70 px-3 py-2 text-[13.5px]">
                   <div className="flex flex-wrap items-center gap-x-3 font-extrabold text-wine">
                     <span className="inline-flex items-center gap-1.5">
-                      <Icon name={MODE_ICON[s.leg.mode]} size={17} /> {s.leg.mode === "walk" ? "Walk" : s.leg.mode === "transit" ? "Transit" : s.leg.mode === "shuttle" ? "Shuttle" : "Taxi"}
+                      <Icon name={MODE_ICON[s.leg.mode]} size={17} /> {s.leg.mode === "walk" ? "Walk" : s.leg.mode === "transit" ? "Transit" : s.leg.mode === "shuttle" ? "Shuttle" : s.leg.mode === "car" ? "Drive" : "Taxi"}
                     </span>
                     <span className="num text-ink">{s.leg.distance}</span>
                     <span className="num text-ink">{s.leg.time}</span>
@@ -338,9 +338,10 @@ export default function MapView() {
   const info = DAYS[day];
   const stops = useMemo(() => stopsForDay(day), [day]);
   const allStops = useMemo(() => DAYS.flatMap((d) => stopsForDay(d.index)), []);
-  const strip = stops.filter((s) => s.lat < 36.15 && s.lat > 36.095);
-  const offMap = stops.filter((s) => s.lat <= 36.095);
-  const downtown = stops.filter((s) => s.lat >= 36.15);
+  const nearTown = (s: Stop) => s.lng > -115.2 && s.lng < -115.0;
+  const strip = stops.filter((s) => nearTown(s) && s.lat < 36.15 && s.lat > 36.095);
+  const offMap = stops.filter((s) => !nearTown(s) || s.lat <= 36.095);
+  const downtown = stops.filter((s) => nearTown(s) && s.lat >= 36.15);
   const sel = stops.find((s) => s.id === selected) ?? null;
 
   return (
@@ -384,7 +385,7 @@ export default function MapView() {
         ) : null}
         {offMap.length ? (
           <p className="mt-2 rounded-xl bg-parchment/70 px-3 py-2 text-[13px] font-bold">
-            📍 Off the map (resort or airport): {offMap.map((s) => s.title).join(" · ")} — use the route list below.
+            📍 Off the map (resort, airport or desert drives): {offMap.map((s) => s.title).join(" · ")} — use the route list below.
           </p>
         ) : null}
         {downtown.length ? (
@@ -426,19 +427,22 @@ export default function MapView() {
       <Collapse title="Getting around Las Vegas" icon="car" defaultOpen={false}>
         <ul className="space-y-3 text-[14.5px]">
           <li>
-            <b className="text-wine">Rideshare is the plan.</b> The resort is about 5 miles from the Strip and 11 from Fremont. We’ve budgeted one round trip each evening, with stops grouped so you ride as little as possible. Prices below the stops are estimates; surge pricing after shows can double a fare, so wait a few minutes if it spikes.
+            <b className="text-wine">Rental car for two desert days only.</b> Tuesday (Red Rock and Seven Magic Mountains) and Wednesday (Valley of Fire). Booking.com showed a rental from about $108.73 for 4 days, so two days should land well under that. The resort lists free self parking.
           </li>
           <li>
-            <b className="text-wine">On the Strip, walk.</b> Each evening’s stops are clustered within about a mile, but blocks are longer than they look (~20 min per mile, more with crossings). Cut through casinos to stay warm and use pedestrian bridges.
+            <b className="text-wine">Rideshare on the other days.</b> The resort is about 5 miles from the Strip and 11 from Fremont. Budgeted: the airport both ways ($33 and $35 from November), one Strip round trip Tuesday (about $19 each way) and one Fremont round trip Thursday. Surge pricing after shows can double a fare, so wait a few minutes if it spikes.
           </li>
           <li>
-            <b className="text-wine">Pickup spots.</b> Venetian, Bellagio and Paris all have marked rideshare pickups; ask the app where to meet. Taxis queue at hotel entrances.
+            <b className="text-wine">Never drive after a drink.</b> The car stays parked at the resort once you are back, so every evening drink happens after a rideshare.
           </li>
           <li>
-            <b className="text-wine">Cold nights.</b> Evenings can drop near freezing. Dress in layers; the Conservatory, Palazzo and casinos are indoors if you need to warm up.
+            <b className="text-wine">On the Strip, walk.</b> The Bellagio, Paris and the fountains are all within a few blocks. Cut through casinos to stay warm and use pedestrian bridges.
           </li>
           <li>
-            <b className="text-wine">Prefer a car?</b> Booking.com showed 4 days from about $108.73. Most Strip hotels charge for parking, and the resort lists free self parking.
+            <b className="text-wine">Desert days.</b> The Valley of Fire West Entrance is closed Mon–Thu through the end of 2026, so use the East Entrance. Download offline maps for both parks; cell service can be spotty.
+          </li>
+          <li>
+            <b className="text-wine">Cold nights.</b> Evenings can drop near freezing. Dress in layers; the Conservatory and casinos are indoors if you need to warm up.
           </li>
         </ul>
         <p className="mt-3 rounded-xl bg-blush/50 px-3 py-2 text-[13px]">

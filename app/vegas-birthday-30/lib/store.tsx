@@ -5,7 +5,7 @@ import { DEFAULT_GROCERIES, DEFAULT_PACKING, DEFAULT_SETTINGS, STOPS } from "./d
 import { computeTotals, type Totals } from "./money";
 import type { AppState, Extra, FoodLog, GroceryItem, Method, PackItem, Settings, StopState } from "./types";
 
-const STORAGE_KEY = "vb30-state-v1";
+const STORAGE_KEY = "vb30-state-v2";
 
 export const uid = (p = "x"): string => `${p}-${Math.random().toString(36).slice(2, 8)}${Date.now().toString(36).slice(-4)}`;
 
@@ -21,7 +21,6 @@ function freshState(): AppState {
     packing: structuredClone(DEFAULT_PACKING),
     groceries: DEFAULT_GROCERIES.map((g, i) => ({ id: `g-${i}`, name: g.name, qty: g.qty, price: null, inRoom: false })),
     confirmed: {
-      "tao-hours": { done: true, note: "Verified Nov 6: Sun–Wed 8:30–10 PM, bar & lounge." },
       "lethai-hours": { done: true, note: "Verified Nov 6: Mon–Thu 4–6 PM." },
     },
     notes: "",

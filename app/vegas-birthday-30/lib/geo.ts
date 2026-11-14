@@ -20,7 +20,7 @@ export const mapsDirUrl = (
 export const modeFor = (s: Stop): Mode =>
   s.leg?.mode === "transit" || s.leg?.mode === "shuttle"
     ? "transit"
-    : s.leg?.mode === "taxi"
+    : s.leg?.mode === "taxi" || s.leg?.mode === "car"
       ? "driving"
       : "walking";
 

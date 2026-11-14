@@ -7,7 +7,8 @@ export type CategoryId =
   | "dining"
   | "birthday"
   | "fun"
-  | "cushion";
+  | "cushion"
+  | "car";
 
 export type StopKind =
   | "arrive"
@@ -24,7 +25,7 @@ export type StopKind =
   | "free"
   | "depart";
 
-export type TravelMode = "walk" | "transit" | "shuttle" | "taxi" | "none";
+export type TravelMode = "walk" | "transit" | "shuttle" | "taxi" | "car" | "none";
 
 export interface Leg {
   mode: TravelMode;

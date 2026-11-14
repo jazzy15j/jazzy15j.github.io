@@ -10,8 +10,8 @@ import { Countdown, TwinkleField, WeatherChip, currentTripDay, tripPhase, useNow
 import { Icon, MoneyField, PayToggle, Photo, Sparkle } from "./ui";
 import { useUi } from "./uiCtx";
 
-const MODE_ICON: Record<string, string> = { walk: "walk", transit: "bus", shuttle: "shuttle", taxi: "car", none: "walk" };
-const MODE_LABEL: Record<string, string> = { walk: "Walk", transit: "Transit", shuttle: "Shuttle", taxi: "Taxi", none: "" };
+const MODE_ICON: Record<string, string> = { walk: "walk", transit: "bus", shuttle: "shuttle", taxi: "car", car: "car", none: "walk" };
+const MODE_LABEL: Record<string, string> = { walk: "Walk", transit: "Transit", shuttle: "Shuttle", taxi: "Taxi", car: "Drive", none: "" };
 
 /* ------------------------------------------------------------------ */
 /* Hero                                                                */

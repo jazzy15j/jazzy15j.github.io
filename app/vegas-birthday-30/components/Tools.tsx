@@ -109,11 +109,11 @@ function Groceries() {
   const [name, setName] = useState("");
   const g = state.groceries;
   const total = r2(g.reduce((a, x) => a + (x.price ?? 0), 0));
-  const stop = state.stops["mon-instacart"];
+  const stop = state.stops["tue-groceries"];
   return (
     <div>
       <p className="mb-3 rounded-xl bg-blush/50 px-3 py-2 text-[13.5px]">
-        Starter ideas below — edit them to match the real Instacart cart. Item prices are optional and just help us see where the $49 went.
+        Starter ideas below — edit them to match what you actually buy. Item prices are optional and just help us see where the money went.
       </p>
       <ul className="space-y-2">
         {g.map((x) => (
@@ -166,21 +166,21 @@ function Groceries() {
       </form>
       <div className="mt-3 flex items-center justify-between rounded-xl bg-parchment/70 px-3 py-2 text-[14px]">
         <span className="font-bold">
-          Item prices: <span className="num">{fmt(total)}</span> · Instacart est <span className="num">{fmt(49)}</span>
+          Item prices: <span className="num">{fmt(total)}</span> · Planned <span className="num">{fmt(90)}</span>
         </span>
         <button
           className="btn btn-ghost !min-h-[38px] !px-3 text-[13px]"
           disabled={total <= 0}
           onClick={() => {
             const prev = stop.actual;
-            patchStop("mon-instacart", { actual: total });
-            pushToast(`Instacart actual set to ${fmt(total)}`, () => patchStop("mon-instacart", { actual: prev }));
+            patchStop("tue-groceries", { actual: total });
+            pushToast(`Grocery actual set to ${fmt(total)}`, () => patchStop("tue-groceries", { actual: prev }));
           }}
         >
           Use as Actual
         </button>
       </div>
-      <p className="mt-2 text-[12.5px] text-ink-soft">Tip: fees and tip on the final Instacart receipt may be higher than item prices — enter the receipt total as the Actual.</p>
+      <p className="mt-2 text-[12.5px] text-ink-soft">Tip: fees and tip on the final grocery receipt may be higher than item prices — enter the register total as the Actual.</p>
     </div>
   );
 }
