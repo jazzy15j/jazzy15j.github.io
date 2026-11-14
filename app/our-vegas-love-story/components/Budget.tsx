@@ -473,7 +473,7 @@ export default function Budget() {
             <b>Cushion left</b> = the cushion envelope minus anything logged to the cushion minus any category that went over its envelope.
           </li>
           <li>The $300 hotel hold is tracked separately and never reduces the budget.</li>
-          <li>A $100 anniversary Venmo gift raised the trip ceiling from $800 to $900 and covers part of the card spending.</li>
+          <li>Two $100 anniversary gifts (Venmo and cash) raised the trip ceiling from $800 to $1,000.</li>
         </ul>
       </Collapse>
     </div>

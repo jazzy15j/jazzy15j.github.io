@@ -6,12 +6,13 @@ import type { AppState, Extra, StopState } from "./types";
  * version to anyone's saved data, replacing only these entries (ids start with "led-")
  * and the stop actuals listed here. Anything else you add yourself is left alone.
  */
-export const LEDGER_VERSION = 8;
+export const LEDGER_VERSION = 9;
 
 // 488 = $450 in hand + $38 that turned up in the cash count and could not be matched to a purchase.
-// Limit is $900: the original $800 plus a $100 anniversary Venmo gift, added to the cushion envelope.
-export const LEDGER_SETTINGS = { limit: 900, cashInHand: 488, atmPlanned: 350, atmDone: true };
-export const LEDGER_ALLOC = { cushion: 297 };
+// Limit is $1,000: the original $800 plus two $100 anniversary gifts (Venmo and cash), added to the cushion envelope.
+// 588 = $450 in hand + $38 unmatched in the cash count + $100 cash gift.
+export const LEDGER_SETTINGS = { limit: 1000, cashInHand: 588, atmPlanned: 350, atmDone: true };
+export const LEDGER_ALLOC = { cushion: 397 };
 
 const st = (actual: number, method: "cash" | "card", notes = ""): Partial<StopState> => ({ actual, method, notes });
 
@@ -26,6 +27,7 @@ export const LEDGER_STOPS: Record<string, Partial<StopState>> = {
   "tue-beauty": st(40, "card", "Food, with tip."),
   "tue-brewdog": st(0, "cash", "Skipped — went to Alexxa's instead."),
   "tue-cvs": st(24, "card", "Corona and salsa."),
+  "fri-taxi": st(35, "cash", "Estimate until the real fare."),
   "wed-return": st(25, "card", "24-hour monorail passes — used a lot."),
   "wed-tao": st(119, "card", "Anniversary dinner (tip was cash)."),
 };
