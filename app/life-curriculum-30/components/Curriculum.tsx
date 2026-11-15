@@ -1,6 +1,7 @@
 "use client";
 
 import { useChecks, useStored } from "../lib/store";
+import Semester from "./Semester";
 import {
   decisions, dailyPrompts, first90, idealDay, philosophy, pillars, principles,
   seasons, successMeasures, townTripRules, values, vision, week,
@@ -150,7 +151,7 @@ export default function Curriculum() {
         <h1>My Personal Life Curriculum</h1>
         <p className="lc-lead">{philosophy}</p>
         <nav aria-label="Sections">
-          {[["vision", "Vision"], ["pillars", "Pillars"], ["week", "Week"], ["first90", "First 90 days"], ["year", "The year"], ["money", "Money"], ["decide", "To decide"], ["journal", "Journal"]].map(([id, label]) => (
+          {[["vision", "Vision"], ["pillars", "Pillars"], ["week", "Week"], ["semester", "Semester"], ["first90", "First 90 days"], ["year", "The year"], ["money", "Money"], ["decide", "To decide"], ["journal", "Journal"]].map(([id, label]) => (
             <a key={id} href={`#${id}`}>{label}</a>
           ))}
         </nav>
@@ -198,6 +199,10 @@ export default function Curriculum() {
           <h3>Town-day rules (save gas, enjoy it)</h3>
           <ul>{townTripRules.map((r) => <li key={r}>{r}</li>)}</ul>
         </div>
+      </Section>
+
+      <Section id="semester" kicker="Dec 7 – Mar 14 · Kearney, NE" title="Winter Semester">
+        <Semester />
       </Section>
 
       <Section id="first90" kicker="Dec – Feb" title="The first 90 days">
