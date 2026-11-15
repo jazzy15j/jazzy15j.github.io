@@ -15,7 +15,7 @@ export type Week = {
 };
 
 export const weeks: Week[] = [
-  { n: 1, label: "Dec 7", sewing: "Read parts of a machine. Reserve the library machine for Tue (needs 1 day notice). Practice threading + bobbin on scrap.", reading: "My Ántonia, bk I (audiobook while cleaning)", kitchen: "Roast a tray of vegetables, salted well", outing: "Get/confirm library card; set up Libby; ask staff about the machine" },
+  { n: 1, label: "Dec 7", sewing: "Read parts of a machine. Reserve the library machine for Tue (needs 1 day notice). Practice threading + bobbin on scrap.", reading: "My Ántonia, bk I (audiobook while cleaning)", kitchen: "Roast a tray of vegetables, salted well", outing: "Get or confirm library card; set up Libby; reserve the Brother SE625 online" },
   { n: 2, label: "Dec 14", soft: "Vegas week — no coursework", sewing: "Rest", reading: "Whatever you want on the plane", kitchen: "Rest", outing: "Las Vegas, Dec 14–18" },
   { n: 3, label: "Dec 21", soft: "Holiday week — one tiny task a day", sewing: "Sew straight lines on scrap fabric (rows ½ inch apart)", reading: "My Ántonia, bk II–III", kitchen: "Soup from what's in the fridge", outing: "Optional thrift stop for sheets/fabric" },
   { n: 4, label: "Dec 28", soft: "Birthday week (Dec 30)", sewing: "Practice backstitch, corners, and a hem on scrap", reading: "Finish My Ántonia", kitchen: "A dish you love, from scratch", outing: "Birthday day = nothing scheduled" },
@@ -26,7 +26,7 @@ export const weeks: Week[] = [
   { n: 9, label: "Feb 1", sewing: "PROJECT 3: curtains — buy/thrift fabric, cut panels", reading: "Braiding Sweetgrass", kitchen: "Make stock from scraps", outing: "Tue: sewing (cut + hem)" },
   { n: 10, label: "Feb 8", sewing: "Curtains: sew side hems and rod pocket", reading: "Braiding Sweetgrass", kitchen: "Braise something cheap and tough", outing: "Tue: sewing" },
   { n: 11, label: "Feb 15", sewing: "Finish and hang curtains (renter-friendly tension rod or command hooks)", reading: "Finish Braiding Sweetgrass; start Meditations (a few pages a day)", kitchen: "Quick pickles", outing: "Tue: sewing; Extension office — ask about preserving classes" },
-  { n: 12, label: "Feb 22", sewing: "Ask about AccuQuilt: cut blocks for a table runner or mini quilt", reading: "Meditations; start Gilead", kitchen: "Plan canning recipes from tested sources", outing: "Tue: AccuQuilt session" },
+  { n: 12, label: "Feb 22", sewing: "AccuQuilt: cut 6.5-inch squares (or an oven mitt or bowl cozy die) for a table runner or mini quilt", reading: "Meditations; start Gilead", kitchen: "Plan canning recipes from tested sources", outing: "Tue: AccuQuilt session" },
   { n: 13, label: "Mar 1", sewing: "Piece the mini quilt / table runner", reading: "Gilead", kitchen: "Order seeds; sketch garden beds", outing: "Tue: sewing" },
   { n: 14, label: "Mar 8", sewing: "Finish a project; photograph everything you made", reading: "Finish Gilead", kitchen: "Cook your favorite recipe of the semester", outing: "Semester review over coffee (Sun Mar 14)" },
 ];
@@ -44,26 +44,41 @@ export const books: Book[] = [
   { title: "The Vegetable Gardener's Bible", author: "Edward C. Smith", kind: "Gardening", why: "For the February garden-planning weeks." },
 ];
 
-export const morning = ["Coffee", "Feed and care for the animals", "15 min stretch or yoga", "Breakfast", "Write today's one intention"];
+export const morning = ["8:00 Wake up, coffee", "8:15 Feed and care for the animals", "8:45 Stretching + lymphatic drainage video (your YouTube routine)", "9:30 Breakfast"];
 export const evening = ["Cook dinner", "Evening show with my husband", "Three lines in the journal (one gratitude)", "Set out tomorrow's sewing or book"];
 
 export type Theme = { day: string; focus: string; do: string[] };
 
 export const dayThemes: Theme[] = [
   { day: "Sunday", focus: "Rest & faith", do: ["Prayer or reflection", "Read for pleasure", "Look at next week (10 min)"] },
-  { day: "Monday", focus: "Home reset", do: ["Clean one zone", "Laundry", "Plan meals", "Reserve library machine for tomorrow"] },
+  { day: "Monday", focus: "Home reset", do: ["Strength: 20 min with the 15 lb dumbbells", "Clean one zone", "Laundry", "Plan meals", "Reserve library machine for tomorrow (one business day ahead)"] },
   { day: "Tuesday", focus: "Town day: sewing lab", do: ["Pick up holds and groceries", "Library sewing session", "Coffee + journal", "One errand loop only"] },
-  { day: "Wednesday", focus: "Make at home", do: ["Prep next project: press, cut, pin", "Hand-sew or mend", "Home improvement task"] },
-  { day: "Thursday", focus: "Mind & body", do: ["30 min reading", "Art: draw or watercolor", "A longer walk outside"] },
-  { day: "Friday", focus: "Money day (2 hours max)", do: ["Review spending", "Business upkeep", "One income experiment step"] },
+  { day: "Wednesday", focus: "Make at home", do: ["Strength: 20 min with the 15 lb dumbbells", "Prep next project: press, cut, pin", "Hand-sew or mend", "Home improvement task"] },
+  { day: "Thursday", focus: "Mind & body", do: ["30 min reading", "Art: draw or watercolor", "A longer walk outside (no weights today)"] },
+  { day: "Friday", focus: "Money day (2 hours max)", do: ["Strength: 20 min with the 15 lb dumbbells", "Review spending", "Business upkeep", "One income experiment step"] },
   { day: "Saturday", focus: "Garden & kitchen", do: ["Weekly kitchen technique", "Household project", "Time with my husband"] },
 ];
 
 export type Resource = { name: string; what: string; confidence: string; contact?: string };
 
 export const resources: Resource[] = [
-  { name: "Kearney Public Library Technology Learning Center", what: "Sewing/embroidery machines, an AccuQuilt cutter, Cricut Makers and more. In-library use, free with your own supplies; reserve at least a day ahead (walk-ins when open). Needs a KPL card in good standing.", confidence: "Search results only; the city site was not reachable from here. An older handout listed $1 per session and the state makerspace listing says fees may vary. Confirm.", contact: "308-233-3282" },
-  { name: "Libby (Nebraska OverDrive Libraries)", what: "Free ebooks and audiobooks through the statewide consortium with your library card. Loans of 7/14 days (audio) and 7/14/21 days (ebooks).", confidence: "Confirmed by the Nebraska Library Commission; check Kearney's card requirements.", contact: "Libby app or libraries.ne.gov" },
-  { name: "Nebraska Extension, Buffalo County", what: "Local horticulture and food help; statewide free Food Preservation Virtual Learning Series (2026 ran Apr 23–Sep 15).", confidence: "Past-year schedules; I could not confirm 2027 classes or a seed library.", contact: "308-236-1235, 1400 E 34th St" },
-  { name: "Museum of Nebraska Art (Kearney)", what: "Art museum for the Tuesday outings.", confidence: "Hours and admission not verified; check before going." },
+  { name: "Library sewing machine (Kearney Public Library)", what: "Brother SE625 sewing/embroidery machines, free to use. Library provides scissors, pins, seam ripper, presser feet, needles and empty bobbins; you bring fabric, thread and projects. Embroidery area is 4\" x 4\" (white and black bobbin thread provided), rated difficult to learn.", confidence: "From the library's own Sewing Machine and Pricing pages. The older $1 handout is outdated.", contact: "2020 1st Ave · 308-233-3282 · Tech librarian 308-233-3612" },
+  { name: "Makerspace rules", what: "Reserve at least one business day ahead online, in person or by phone; the spot is held 15 minutes; limit two reservations per week per device. Walk-ins welcome if the machine is free. Makerspace is closed Saturday afternoons, Sundays and public holidays. Needs a library card in good standing.", confidence: "From the library's Technology Learning Center and Makerspace pages.", contact: "Hours: Mon–Thu 9–9, Fri–Sat 9–5, Sun 1–5" },
+  { name: "AccuQuilt GO! Big cutter", what: "Free, bring your own fabric. Library provides dies, mats, iron, ironing board and extra table space. Dies include 6.5\" squares, flying geese, oven mitt, bowl cozy, burp cloth, strips and more.", confidence: "From the library's AccuQuilt page; rated simple to learn." },
+  { name: "Libby and the library catalog", what: "Free ebooks, audiobooks and magazines with your card (audiobooks 7 or 14 days, ebooks 7, 14 or 21 days, no fines). Also a Bookmobile and film streaming. The library's makerspace page links sewing books in its catalog: The Sewing Book (Alison Smith), Martha Stewart's Encyclopedia of Sewing, The Complete Manual of Sewing, My Sewing Workshop.", confidence: "From the library's eBooks and Makerspace pages. Whether each title is on a shelf or in Libby today must be checked in the catalog.", contact: "Main desk 308-233-3282" },
+  { name: "Nebraska Extension, Buffalo County", what: "Local horticulture and food help; statewide free online Food Preservation series (2026 ran Apr 23–Sep 15).", confidence: "Past-year schedules; I could not confirm 2027 classes or a seed library.", contact: "308-236-1235, 1400 E 34th St" },
+  { name: "Museum of Nebraska Art (Kearney)", what: "Art museum for Tuesday outings.", confidence: "Hours and admission not verified; check before going." },
+];
+
+export type Supply = { group: string; items: string[] };
+
+export const supplies: Supply[] = [
+  { group: "Bring to every library sewing session", items: ["Fabric for that day's project (pre-washed and pressed)", "All-purpose thread: one neutral (white/cream/grey) plus a match for the project", "Fabric chalk or a washable marker", "Measuring tape and a clear 6\" ruler", "Sewing clips (kinder to thick fabric than pins)", "Small fabric scissors or thread snips (library has scissors, bring your own for comfort)", "A tote bag to carry it all"] },
+  { group: "Thrift list: napkins (Weeks 5–6)", items: ["Flat cotton or flannel sheet, any pattern you like (one sheet makes dozens)", "Or 100% cotton or linen cloth napkins to reuse"] },
+  { group: "Thrift list: pillow cover (Weeks 7–8)", items: ["Pillow to use as the insert (about 16–18\")", "Cotton or linen fabric: half a yard, or a thrifted curtain or shirt"] },
+  { group: "Thrift list: curtains (Weeks 9–11)", items: ["Flat sheets or ready-made curtain panels (your windows' measurements first)", "Tension rod, or a rod you can hang without drilling", "Curtain clip rings if you skip the rod pocket"] },
+  { group: "Thrift list: mini quilt (Weeks 12–14)", items: ["Cotton shirts, sheets or scraps for blocks (6.5\" squares fit the library die)", "A small thrifted blanket or cotton batting", "Backing: one more flat sheet"] },
+  { group: "At home (iron before every session)", items: ["Iron and a towel or pressing board", "A hand-sewing kit for finishing: needle, thimble if you like", "A small box to keep scraps"] },
+  { group: "Thrift smart", items: ["Pick cotton, linen or flannel; skip stretchy or slippery fabric for your first projects", "Flat sheets, not fitted; look for tight, soft weave", "Check for stains, holes and smells; wash everything hot before cutting"] },
+  { group: "Strength days (Mon, Wed, Fri)", items: ["Your two 15 lb dumbbells", "A mat or towel", "Beginner moves to start: goblet squat, Romanian deadlift, overhead press, bent-over row, glute bridge (go lighter on the first week)"] },
 ];

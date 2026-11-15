@@ -2,7 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import { useChecks } from "../lib/store";
-import { books, dayThemes, evening, morning, resources, SEMESTER_START, weeks } from "../lib/semester";
+import { books, dayThemes, evening, morning, resources, supplies, SEMESTER_START, weeks } from "../lib/semester";
 
 const noop = () => () => {};
 function useToday(): string {
@@ -92,6 +92,16 @@ export default function Semester() {
             <h3>{b.title}</h3>
             <p>{b.author}</p>
             <p className="lc-note">{b.why}</p>
+          </article>
+        ))}
+      </div>
+
+      <h3 style={{ marginTop: "2rem" }}>Thrifting and supplies list</h3>
+      <div className="lc-grid2">
+        {supplies.map((g) => (
+          <article key={g.group} className="lc-card">
+            <h3>{g.group}</h3>
+            <ul>{g.items.map((i) => <li key={i}>{i}</li>)}</ul>
           </article>
         ))}
       </div>
