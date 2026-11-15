@@ -1,0 +1,51 @@
+/* Scoped under .lc30 so nothing leaks into the portfolio. */
+.lc30 {
+  --paper: #f3ecdf; --card: #fbf7ee; --ink: #33302a; --soft: #6b665a;
+  --sage: #52704f; --clay: #b0623f; --line: #ddd2bb;
+  font-family: "Nunito Sans", system-ui, sans-serif;
+  color: var(--ink); background: var(--paper); min-height: 100dvh;
+  color-scheme: light; line-height: 1.55; overflow-x: clip;
+}
+.lc30 h1, .lc30 h2, .lc30 h3 { font-family: "Lora", Georgia, serif; font-weight: 600; line-height: 1.2; margin: 0; }
+.lc30 h1 { font-size: clamp(2rem, 7vw, 3.4rem); }
+.lc30 h2 { font-size: clamp(1.5rem, 4.5vw, 2.1rem); margin-bottom: 1rem; }
+.lc30 h3 { font-size: 1.1rem; margin: .2rem 0 .5rem; }
+.lc-hero, .lc-section, .lc-foot { max-width: 68rem; margin: 0 auto; padding: 2.5rem 16px 0; }
+.lc-hero { padding-top: 3.5rem; }
+.lc-lead { font-family: "Lora", serif; font-style: italic; font-size: 1.2rem; color: var(--sage); margin: .8rem 0 1.4rem; max-width: 36rem; }
+.lc-hero nav { display: flex; flex-wrap: wrap; gap: .5rem; position: sticky; top: 0; padding: .6rem 0; background: var(--paper); z-index: 5; }
+.lc-hero nav a { padding: .35rem .8rem; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); text-decoration: none; font-size: .9rem; background: var(--card); }
+.lc-hero nav a:hover, .lc-hero nav a:focus-visible { border-color: var(--sage); }
+.lc-kicker { text-transform: uppercase; letter-spacing: .08em; font-size: .75rem; font-weight: 700; color: var(--clay); margin: 0 0 .3rem; }
+.lc-note { color: var(--soft); font-size: .9rem; margin: .5rem 0 1rem; }
+.lc-section { scroll-margin-top: 3rem; }
+.lc-grid2, .lc-grid3 { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .lc-grid2 { grid-template-columns: 1fr 1fr; } .lc-grid3 { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 960px) { .lc-grid3 { grid-template-columns: repeat(3, 1fr); } }
+.lc-card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem 1.2rem; }
+.lc-wide { margin-top: 1rem; }
+.lc-card ul, .lc-card ol { margin: 0 0 .6rem; padding-left: 1.2rem; }
+.lc-card li { margin: .2rem 0; }
+.lc-theme { color: var(--sage); font-weight: 700; margin: 0 0 .4rem; }
+.lc-chips { display: flex; flex-wrap: wrap; gap: .4rem; margin: .5rem 0; }
+.lc-chips span, .lc-chips button { font: inherit; font-size: .85rem; padding: .3rem .7rem; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); }
+.lc-chips button { cursor: pointer; min-height: 44px; }
+.lc-chips button.on { background: var(--sage); border-color: var(--sage); color: #fff; }
+.lc-checks { list-style: none; padding: 0 !important; }
+.lc-checks label { display: flex; gap: .6rem; align-items: flex-start; padding: .35rem 0; cursor: pointer; }
+.lc-checks input { width: 1.2rem; height: 1.2rem; margin-top: .2rem; accent-color: var(--sage); flex: none; }
+.lc-fields { display: grid; gap: .8rem; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .lc-fields { grid-template-columns: 1fr 1fr; } }
+.lc-fields label { display: grid; gap: .25rem; font-size: .9rem; font-weight: 600; }
+.lc30 input:not([type=checkbox]), .lc30 select, .lc30 textarea { font: inherit; font-size: 1rem; padding: .6rem .7rem; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); width: 100%; }
+.lc30 textarea { resize: vertical; margin-top: .5rem; }
+.lc30 :focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; }
+.lc-results { display: grid; grid-template-columns: repeat(2, 1fr); gap: .8rem; margin: 1.2rem 0 .5rem; }
+@media (min-width: 640px) { .lc-results { grid-template-columns: repeat(4, 1fr); } }
+.lc-results div { background: var(--paper); border-radius: 10px; padding: .7rem .8rem; }
+.lc-results dt { font-size: .75rem; color: var(--soft); }
+.lc-results dd { margin: .1rem 0 0; font-family: "Lora", serif; font-size: 1.4rem; }
+.lc-results small { display: block; font-family: "Nunito Sans", sans-serif; font-size: .75rem; color: var(--soft); }
+.lc-prompt { font-family: "Lora", serif; font-style: italic; font-size: 1.15rem; margin: 0 0 .3rem; }
+.lc-link { background: none; border: 0; color: var(--sage); text-decoration: underline; cursor: pointer; font: inherit; padding: .5rem 0; min-height: 44px; }
+.lc-foot { padding-bottom: 3rem; color: var(--soft); font-size: .85rem; text-align: center; margin-top: 2rem; }
