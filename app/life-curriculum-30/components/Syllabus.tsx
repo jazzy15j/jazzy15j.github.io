@@ -1,9 +1,8 @@
 "use client";
 
 import { useChecks, useStored } from "../lib/store";
-import Semester from "./Semester";
 import {
-  decisions, dailyPrompts, first90, idealDay, philosophy, pillars, principles,
+  decisions, first90, idealDay, pillars, principles,
   seasons, successMeasures, townTripRules, values, vision, week,
 } from "../lib/data";
 
@@ -128,36 +127,13 @@ function DecisionCard({ id, question, options }: { id: string; question: string;
   );
 }
 
-function Journal() {
-  const [entry, setEntry] = useStored("journal:entry", "");
-  const [prompt, setPrompt] = useStored("journal:prompt", "0");
-  const i = Number(prompt) % dailyPrompts.length;
+export default function Syllabus() {
   return (
-    <div className="lc-card">
-      <p className="lc-prompt">{dailyPrompts[i]}</p>
-      <button type="button" className="lc-link" onClick={() => setPrompt(String((i + 1) % dailyPrompts.length))}>Another prompt</button>
-      <textarea rows={6} value={entry} onChange={(e) => setEntry(e.target.value)} placeholder="Write here. It stays in this browser."
-        aria-label="Curriculum journal" />
-      <p className="lc-note">A scratchpad, not an archive: copy anything you want to keep into a real notebook.</p>
-    </div>
-  );
-}
+    <div className="lc-syllabus">
+      <h1>Syllabus</h1>
+      <p className="lc-why">The big picture behind the course: your vision, ten pillars, the weekly rhythm and the open questions.</p>
 
-export default function Curriculum() {
-  return (
-    <main className="lc30">
-      <header className="lc-hero">
-        <p className="lc-kicker">Age 30 · December 2026 – December 2027</p>
-        <h1>My Personal Life Curriculum</h1>
-        <p className="lc-lead">{philosophy}</p>
-        <nav aria-label="Sections">
-          {[["vision", "Vision"], ["pillars", "Pillars"], ["week", "Week"], ["semester", "Semester"], ["first90", "First 90 days"], ["year", "The year"], ["money", "Money"], ["decide", "To decide"], ["journal", "Journal"]].map(([id, label]) => (
-            <a key={id} href={`#${id}`}>{label}</a>
-          ))}
-        </nav>
-      </header>
-
-      <Section id="vision" kicker="Why" title="The life I'm designing">
+      <Section id="vision" kicker="Why" title="The life I&rsquo;m designing">
         <div className="lc-grid2">
           <div className="lc-card">
             <h3>Vision</h3>
@@ -185,7 +161,7 @@ export default function Curriculum() {
         </div>
       </Section>
 
-      <Section id="week" kicker="Proposed, not confirmed" title="A flexible weekly rhythm">
+      <Section id="week" kicker="Your rhythm" title="The weekly rhythm">
         <div className="lc-grid3">
           {week.map((d) => (
             <article key={d.day} className="lc-card">
@@ -196,21 +172,17 @@ export default function Curriculum() {
           ))}
         </div>
         <div className="lc-card lc-wide">
-          <h3>Town-day rules (save gas, enjoy it)</h3>
+          <h3>Town-day rules</h3>
           <ul>{townTripRules.map((r) => <li key={r}>{r}</li>)}</ul>
         </div>
       </Section>
 
-      <Section id="semester" kicker="Dec 7 – Mar 14 · Kearney, NE" title="Winter Semester">
-        <Semester />
-      </Section>
-
-      <Section id="first90" kicker="Dec – Feb" title="The first 90 days">
+      <Section id="first90" kicker="Dec – Feb" title="Your first-90-days goals">
         <Checklist />
       </Section>
 
-      <Section id="year" kicker="Draft — edit freely" title="The year by season">
-        <p className="lc-note">One suggested shape. Planting dates depend on your local frost dates; adjust before relying on them.</p>
+      <Section id="year" kicker="Draft" title="After the semester: the year by season">
+        <p className="lc-note">One suggested shape. Planting dates depend on your local frost dates; confirm with Extension.</p>
         <div className="lc-grid3">
           {seasons.map((s) => (
             <article key={s.months} className="lc-card">
@@ -234,12 +206,6 @@ export default function Curriculum() {
       <Section id="decide" kicker="Open questions" title="Still to decide">
         <Decisions />
       </Section>
-
-      <Section id="journal" title="Curriculum journal">
-        <Journal />
-      </Section>
-
-      <footer className="lc-foot">Private page · nothing here is sent anywhere.</footer>
-    </main>
+    </div>
   );
 }

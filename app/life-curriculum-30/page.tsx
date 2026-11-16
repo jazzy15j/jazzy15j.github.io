@@ -1,5 +1,5 @@
-import Curriculum from "./components/Curriculum";
+import App from "./components/App";
 
 export default function Page() {
-  return <Curriculum />;
+  return <App />;
 }
