@@ -21,7 +21,7 @@ in plain language: what it does, who it helps, and why it matters.
   `public/our-vegas-love-story/photos` with licenses in
   `app/our-vegas-love-story/lib/credits.json`.
 - `/life-curriculum-30` — Jasmine's personal life curriculum for age 30, built as a day-by-day
-  course (Orientation + 14-week Winter Semester, Dec 2026 – Mar 2027, Kearney NE): daily lessons,
+  course (Orientation from Nov 17 + 16-week Winter Semester, through Mar 14, 2027, Kearney NE): daily lessons,
   weekly overviews, a resource library with live links, reading shelf, logs (sewing, kitchen,
   reading, movement, work hours, thrift), backup/restore. Hash-routed (`#/day/w1d1`), saves to
   browser storage only, `noindex`.

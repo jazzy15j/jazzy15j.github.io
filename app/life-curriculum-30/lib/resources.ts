@@ -67,10 +67,10 @@ export type Supply = { group: string; items: string[] };
 
 export const supplies: Supply[] = [
   { group: "Bring to every library sewing session", items: ["Fabric for that day's project (pre-washed and pressed)", "All-purpose thread: one neutral plus one that matches", "Fabric chalk or washable marker", "Measuring tape and a clear 6-inch ruler", "Sewing clips", "Small fabric scissors or thread snips", "A tote bag to carry it all", "The library provides scissors, pins, seam ripper, presser feet, needles and bobbins"] },
-  { group: "Thrift: napkins (weeks 5–6)", items: ["Flat cotton or flannel sheet, any pattern", "Or 100% cotton or linen napkins"] },
-  { group: "Thrift: pillow cover (weeks 7–8)", items: ["16-inch pillow insert", "½ yard cotton or linen, or a thrifted curtain or shirt"] },
-  { group: "Thrift: curtains (weeks 9–11)", items: ["Flat sheets or ready-made curtain panels", "Tension rod or a rod you can hang without drilling"] },
-  { group: "Thrift: mini quilt (weeks 12–14)", items: ["Cotton shirts, sheets or scraps for nine 6½-inch squares", "A small thrifted blanket or cotton batting", "A flat sheet for backing"] },
+  { group: "Thrift: napkins (weeks 7–8)", items: ["Flat cotton or flannel sheet, any pattern", "Or 100% cotton or linen napkins"] },
+  { group: "Thrift: pillow cover (weeks 9–10)", items: ["16-inch pillow insert", "½ yard cotton or linen, or a thrifted curtain or shirt"] },
+  { group: "Thrift: curtains (weeks 11–13)", items: ["Flat sheets or ready-made curtain panels", "Tension rod or a rod you can hang without drilling"] },
+  { group: "Thrift: mini quilt (weeks 14–16)", items: ["Cotton shirts, sheets or scraps for nine 6½-inch squares", "A small thrifted blanket or cotton batting", "A flat sheet for backing"] },
   { group: "At home", items: ["Iron and pressing towel or board", "Hand-sewing needles", "A box for scraps", "Two 15 lb dumbbells and a mat"] },
   { group: "Thrift smart", items: ["Choose cotton, linen or flannel. Skip stretchy or slippery fabric at first", "Flat sheets, not fitted", "Check for stains, holes and smells; wash hot before cutting"] },
 ];

@@ -1,7 +1,7 @@
 "use client";
 
 import { useChecks, useJson } from "../lib/store";
-import { course, dayName, prettyDate } from "../lib/course";
+import { course, dayName, prettyDate, weekLabel, TOTAL_WEEKS } from "../lib/course";
 import { Bar } from "./ui";
 
 const EMPTY: Record<string, string> = {};
@@ -17,13 +17,13 @@ export default function WeekView({ n }: { n: number }) {
   const next = course.find((w) => w.n === n + 1);
   return (
     <article>
-      <nav className="lc-crumbs"><a href="#/course">Course</a> › {n === 0 ? "Orientation" : `Week ${n}`}</nav>
+      <nav className="lc-crumbs"><a href="#/course">Course</a> › {weekLabel(n)}</nav>
       <header className="lc-lessonhead">
-        <p className="lc-kicker">{n === 0 ? "Orientation" : `Week ${n} of 14`} · {prettyDate(week.start)} – {prettyDate(week.lessons[6].date)}</p>
+        <p className="lc-kicker">{n === 0 ? "Orientation" : `Week ${n} of ${TOTAL_WEEKS}`} · {prettyDate(week.start)} – {prettyDate(week.lessons[week.lessons.length - 1].date)}</p>
         <h1>{week.title}</h1>
         <p className="lc-why">{week.goal}</p>
-        <Bar value={complete} max={7} label="Days complete this week" />
-        <p className="lc-note">{complete} of 7 days complete</p>
+        <Bar value={complete} max={week.lessons.length} label="Days complete this week" />
+        <p className="lc-note">{complete} of {week.lessons.length} days complete</p>
       </header>
 
       <div className="lc-grid2">
@@ -41,7 +41,7 @@ export default function WeekView({ n }: { n: number }) {
         </section>
       </div>
 
-      <h2 className="lc-h2">The seven days</h2>
+      <h2 className="lc-h2">The days</h2>
       <ol className="lc-daylist">
         {week.lessons.map((l) => (
           <li key={l.id}>
@@ -62,7 +62,7 @@ export default function WeekView({ n }: { n: number }) {
       </section>
 
       <nav className="lc-pager">
-        {prev ? <a href={`#/week/${prev.n}`}>← {prev.n === 0 ? "Orientation" : `Week ${prev.n}`}</a> : <span />}
+        {prev ? <a href={`#/week/${prev.n}`}>← {weekLabel(prev.n)}</a> : <span />}
         {next ? <a href={`#/week/${next.n}`}>Week {next.n} →</a> : <span />}
       </nav>
     </article>

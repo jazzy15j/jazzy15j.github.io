@@ -1,6 +1,6 @@
 import { L, bible, catalog, libbySearch, yt, type Link } from "./links";
 
-// The Winter Semester: Orientation (Nov 30) + 14 weeks (Dec 7 – Mar 14).
+// The Winter Semester: Orientation (starts Tue Nov 17) + 16 weeks (Nov 23 – Mar 14).
 // Weeks run Monday to Sunday. Library/Libby availability must be checked live.
 
 export type Part = "morning" | "core" | "afternoon" | "evening";
@@ -64,8 +64,8 @@ type WeekDef = {
   outing?: string;
 };
 
-export const SEMESTER_START = "2026-12-07";
-export const COURSE_START = "2026-11-30";
+export const SEMESTER_START = "2026-11-23";
+export const COURSE_START = "2026-11-17";
 export const COURSE_END = "2027-03-14";
 
 const DAY_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -81,11 +81,14 @@ export function prettyDate(iso: string): string {
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
 }
 export function dayName(i: number) { return DAY_NAMES[i]; }
+export const TOTAL_WEEKS = 16;
+export function weekLabel(n: number): string { return n === 0 ? "Orientation" : `Week ${n}`; }
+function weekdayIdx(iso: string): number { return (new Date(`${iso}T12:00:00Z`).getUTCDay() + 6) % 7; }
 
 const STRENGTH = {
   text: "Strength with your two 15 lb dumbbells (about 20 min)",
   how: [
-    "Rounds: week 1–2 do 2 rounds; from week 5 do 3. Rest 60 seconds between rounds.",
+    "Rounds: weeks 1–4 do 2 rounds; from week 5 do 3. Rest 60 seconds between rounds.",
     "10 goblet squats (hold one dumbbell at your chest)",
     "10 Romanian deadlifts (both dumbbells, hinge at the hips, back flat)",
     "8 overhead presses",
@@ -112,22 +115,21 @@ const THEMES = ["Home reset", "Town day", "Make at home", "Mind & body", "Money 
 
 const WEEKS: WeekDef[] = [
   {
-    n: 0, start: "2026-11-30", kind: "orientation", title: "Orientation",
-    goal: "Get your library card, Libby, machine reservation and supplies ready so week 1 starts smoothly.",
+    n: 0, start: "2026-11-17", kind: "orientation", title: "Get set up",
+    goal: "Get your library card, Libby, machine reservation and supplies ready, starting tomorrow.",
     outcomes: ["Library card works in the catalog and Libby", "First library sewing session is booked", "Thrift-and-supplies list in hand"],
     materials: ["Photo ID for the library", "Phone with the Libby app"],
     days: [
-      { title: "Set up your course", steps: ["Open Settings and paste your stretching and lymphatic video link", "Skim the Course map so you know what the 14 weeks look like", "Pick the one thing you're most excited about"], links: [L.libby] },
-      { title: "Town day: card, tour, questions", steps: ["Visit the library (2020 1st Avenue) and confirm your card is in good standing", "Ask staff to show you the makerspace and the Brother SE625 sewing machine", "Ask whether the booking page works from your phone", "Pick up one book from the Sewing shelf to browse"], links: [L.maker, L.sewPage, L.reserve, L.catalogHome], log: "reading" },
-      { title: "Set up Libby", steps: ["Install Libby and add the Nebraska library with your card", "Borrow or place a hold on My Ántonia (listen on audio while cleaning)", "Add Four Thousand Weeks and Braiding Sweetgrass to your holds or wish list", "Set the loan length (7, 14 or 21 days)"], links: [L.libby, L.libbyHelp, L.ebooks, libbySearch("My Ántonia"), libbySearch("Four Thousand Weeks")] },
-      { title: "Read the machine manual", steps: ["Read the sewing machine page and the pricing and policy page", "Watch one threading tutorial for a Brother machine", "Reserve the machine for Tuesday Dec 8 (one business day ahead; max two a week)"], links: [L.sewPage, L.pricing, L.reserve, yt("brother SE625 threading tutorial")] },
+      { title: "Town day: card, tour, first booking", steps: ["Visit the library (2020 1st Avenue) and confirm your card is in good standing", "Ask staff to show you the makerspace and the Brother SE625 sewing machine", "Reserve the machine for next Tuesday, Nov 24 (one business day ahead; max two a week)", "Ask staff to help you add the library to Libby on your phone", "Pick up one book from the sewing shelf to browse"], links: [L.maker, L.sewPage, L.reserve, L.catalogHome], log: "reading" },
+      { title: "Set up your course and Libby", steps: ["Open Settings and paste your stretching and lymphatic video link", "Skim the Course map so you know what the weeks look like", "In Libby, borrow or place a hold on My Ántonia (listen on audio while cleaning)", "Add Four Thousand Weeks and Braiding Sweetgrass to your holds or wish list"], links: [L.libby, L.libbyHelp, L.ebooks, libbySearch("My Ántonia"), libbySearch("Four Thousand Weeks")] },
+      { title: "Read the machine manual", steps: ["Read the sewing machine page and the pricing and policy page", "Watch one threading tutorial for a Brother machine", "Start listening to My Ántonia"], links: [L.sewPage, L.pricing, yt("brother SE625 threading tutorial"), libbySearch("My Ántonia")] },
       { title: "Money day: semester budget", steps: ["Choose a small fixed budget for fabric and supplies this semester", "Write it on the first page of your journal", "Plan to spend most of it at thrift stores"], log: "thrift" },
       { title: "First thrift run", steps: ["Look for 2 flat cotton or flannel sheets (not fitted), plus 1 thrifted pillow", "Check for stains and smells; skip stretchy fabric", "Wash everything hot and dry it at home", "Log what you bought and what it cost"], links: [yt("how to thrift fabric sheets for sewing beginners")], log: "thrift" },
       { title: "Rest and preview", steps: ["Rest. Slow morning, faith, reading for pleasure", "Look at Week 1 in the Course map (10 minutes)", "Lay out your supplies by the door for Tuesday"] },
     ],
   },
   {
-    n: 1, start: "2026-12-07", kind: "normal", title: "Meet the machine",
+    n: 1, start: "2026-11-23", kind: "normal", title: "Meet the machine",
     goal: "Learn the parts of a sewing machine and sew your first straight lines.",
     outcomes: ["Name the main parts of the machine", "Wind a bobbin and thread the needle", "Sew three practice lines on scrap fabric"],
     materials: ["Scrap fabric or an old pillowcase", "All-purpose thread (white or cream)", "Washable marker or chalk"],
@@ -141,10 +143,44 @@ const WEEKS: WeekDef[] = [
     money: ["List your recurring monthly expenses", "Write down what share of income comes from Fiverr (just a number)"],
     kitchen: { name: "Roast a tray of vegetables", how: ["Heat the oven to 425°F", "Cut vegetables to a similar size, toss with oil and salt", "Roast in a single layer for 25–35 minutes, turning once", "Taste. Add acid (lemon or vinegar) at the end"], q: "how to roast vegetables 425 salt fat acid heat" },
     sat: "Wipe down the kitchen and take stock of the pantry (20 minutes)",
+    outing: "Coffee and journaling after the library. Thursday is Thanksgiving; the library is closed",
+  },
+  {
+    n: 2, start: "2026-11-30", kind: "normal", title: "Straight lines",
+    goal: "Get comfortable sewing straight, even lines.",
+    outcomes: ["Thread the machine without help", "Sew straight lines at a steady speed", "Control the start and stop"],
+    materials: ["Scrap fabric", "Thread", "Chalk and a ruler"],
+    home: "bedroom",
+    sewTitle: "Straight lines",
+    sewTue: ["Thread the machine yourself, then ask staff to check it", "Sew rows of lines half an inch apart on a scrap", "Check that the lines are straight and even", "Practice starting and stopping slowly"],
+    sewWed: ["Press the scraps flat", "Watch a short tutorial on sewing straight lines", "Draw guide lines on a scrap with chalk and a ruler"],
+    reading: { book: "My Ántonia", what: "Book II: The Hired Girls" },
+    art: "Draw ten straight parallel lines freehand, then ten curved ones.",
+    faith: { ref: "Psalm 8", prompt: "What am I noticing about the world around me?" },
+    money: ["Keep tracking every thrift buy in the log", "Write down what share of income comes from Fiverr (just a number)"],
+    kitchen: { name: "Soup from what's in the fridge", how: ["Sauté an onion and garlic in oil", "Add chopped vegetables, stock or water, and simmer until soft", "Taste and adjust salt and acid"], q: "how to make soup from leftovers" },
+    sat: "Wipe down the kitchen and take stock of the pantry (20 minutes)",
     outing: "Coffee and journaling after the library",
   },
   {
-    n: 2, start: "2026-12-14", kind: "trip", title: "Las Vegas week",
+    n: 3, start: "2026-12-07", kind: "normal", title: "Backstitch, corners and hems",
+    goal: "Learn the three skills every project needs.",
+    outcomes: ["Backstitch at both ends of a seam", "Pivot at a square corner", "Sew a plain double-fold hem"],
+    materials: ["Scrap fabric", "Thread", "Fabric clips", "Iron"],
+    home: "office and desk",
+    sewTitle: "Backstitch, corners and a hem",
+    sewTue: ["Practice backstitch at the start and end of each seam", "Sew a square, pivoting at each corner with the needle down", "Fold ½ inch twice and sew a hem on one edge"],
+    sewWed: ["Press your practice hem flat", "Watch a short hemming tutorial", "Cut four 14-inch squares from the sheet for the napkins"],
+    reading: { book: "My Ántonia", what: "Books III–IV" },
+    art: "Watercolor: three washes (flat, graded, wet-into-wet) on scrap paper.",
+    faith: { ref: "Psalm 100", prompt: "What am I grateful for this week?" },
+    money: ["List this year's business income by source (just numbers)", "Note how much of it you want to keep"],
+    kitchen: { name: "Cook eggs three ways", how: ["Scramble gently over low heat", "Fry with a lid for set whites and a runny yolk", "Boil for 6–7 minutes for a soft yolk"], q: "how to cook eggs three ways" },
+    sat: "One household project (45 minutes)",
+    outing: "Library, then a short walk",
+  },
+  {
+    n: 4, start: "2026-12-14", kind: "trip", title: "Las Vegas week",
     goal: "No coursework. Enjoy your trip.",
     outcomes: ["Enjoy the trip", "Log a gratitude each day"],
     materials: ["Your Vegas trip planner"],
@@ -155,41 +191,41 @@ const WEEKS: WeekDef[] = [
       { title: "Vegas day", steps: ["Follow the itinerary", "One gratitude line in the log below"], links: [L.vegas] },
       { title: "Vegas: last day", steps: ["Follow the itinerary", "Gratitude line"], links: [L.vegas] },
       { title: "Home and unpack", steps: ["Unpack and do one load of laundry", "Slow evening with your husband"] },
-      { title: "Rest", steps: ["Rest. Faith and reading for pleasure", "Preview Week 3 (10 minutes)"], links: [bible("Psalm 8")] },
+      { title: "Rest", steps: ["Rest. Faith and reading for pleasure", "Preview Week 5 (10 minutes)"], links: [bible("Psalm 8")] },
     ],
   },
   {
-    n: 3, start: "2026-12-21", kind: "soft", title: "Holiday week",
-    goal: "Keep things light. One library session, one tiny task each day.",
+    n: 5, start: "2026-12-21", kind: "soft", title: "Holiday week",
+    goal: "Keep things light. One optional library session, one tiny task each day.",
     outcomes: ["Sew straight lines evenly", "Rest and enjoy the holiday"],
     materials: ["Scrap fabric", "Thread", "Chalk"],
     days: [
       { title: "Gentle reset", steps: ["Reserve the library machine for Tuesday (one business day ahead)", "Tidy the table and entryway (20 minutes)"], links: [L.reserve] },
-      { title: "Town day: line practice", steps: ["Library: sew rows of lines half an inch apart on a scrap", "Check that your lines are straight and even", "Treat yourself to coffee"], links: [L.sewPage, yt("sewing straight lines beginner tips")], log: "sewing" },
+      { title: "Town day: practice session", steps: ["Library: review straight lines, backstitch and hems on a scrap", "Ask staff to check one seam", "Treat yourself to coffee"], links: [L.sewPage, yt("sewing straight lines beginner tips")], log: "sewing" },
       { title: "Light day", steps: ["20 minutes of something creative or restful", "Read for pleasure"] },
-      { title: "Light day", steps: ["Walk outside (30 minutes)", "Listen to My Ántonia, Books II–III"], links: [libbySearch("My Ántonia")] },
+      { title: "Light day", steps: ["Walk outside (30 minutes)", "Listen to My Ántonia, Book V"], links: [libbySearch("My Ántonia")] },
       { title: "Christmas", steps: ["No lessons today. The library is closed.", "Gratitude line in the log"], links: [bible("Luke 2:1-20")] },
       { title: "Soup from the fridge", steps: ["Make soup from whatever is in the fridge", "Taste and adjust salt and acid"], links: [yt("how to make soup from leftovers")], log: "kitchen" },
-      { title: "Rest", steps: ["Rest. Read Matthew 6:25–34", "Preview Week 4"], links: [bible("Matthew 6:25-34")] },
+      { title: "Rest", steps: ["Rest. Read Matthew 6:25–34", "Preview Week 6"], links: [bible("Matthew 6:25-34")] },
     ],
   },
   {
-    n: 4, start: "2026-12-28", kind: "soft", title: "Birthday week",
-    goal: "Learn backstitch, corners and a hem. Your birthday is Wednesday.",
-    outcomes: ["Backstitch at both ends", "Turn a square corner", "Sew a plain hem"],
+    n: 6, start: "2026-12-28", kind: "soft", title: "Birthday week",
+    goal: "Cut your napkin squares. Your birthday is Wednesday.",
+    outcomes: ["Cut accurate squares", "Press fabric flat"],
     materials: ["Scrap fabric", "Thread", "Fabric clips"],
     days: [
       { title: "Gentle reset", steps: ["Reserve the machine for Tuesday", "Reset one small zone (20 minutes)"], links: [L.reserve] },
-      { title: "Town day: backstitch, corners, hem", steps: ["Practice backstitch at the start and end of each seam", "Sew a square, pivoting at each corner with the needle down", "Fold ½-inch twice and sew a hem on one edge"], links: [L.sewPage, yt("sewing hem beginner fold twice")], log: "sewing" },
+      { title: "Town day: napkin prep", steps: ["Press the sheet flat and cut four 14-inch squares", "Fold ½ inch twice on one edge and sew a test hem", "Ask staff for one tip"], links: [L.sewPage, yt("sewing hem beginner fold twice")], log: "sewing" },
       { title: "Your birthday", steps: ["Nothing is required. Gratitude line in the log"] },
-      { title: "Light day", steps: ["Finish listening to My Ántonia", "Walk outside"], links: [libbySearch("My Ántonia")] },
+      { title: "Light day", steps: ["Finish My Ántonia (if you haven't already)", "Walk outside"], links: [libbySearch("My Ántonia")] },
       { title: "Year in review", steps: ["Spend 20 minutes writing three wins from 2026", "Write one hope for 2027"] },
       { title: "Cook a favorite", steps: ["Cook something you love from scratch", "Log what you cooked and how it went"], log: "kitchen" },
-      { title: "Rest", steps: ["Rest. Read Ecclesiastes 3", "Preview Week 5 and the napkin project"], links: [bible("Ecclesiastes 3:1-14")] },
+      { title: "Rest", steps: ["Rest. Read Ecclesiastes 3", "Preview Week 7 and the napkin project"], links: [bible("Ecclesiastes 3:1-14")] },
     ],
   },
   {
-    n: 5, start: "2027-01-04", kind: "normal", title: "Project 1: cloth napkins (part 1)",
+    n: 7, start: "2027-01-04", kind: "normal", title: "Project 1: cloth napkins (part 1)",
     goal: "Cut and begin sewing four cloth napkins.",
     outcomes: ["Cut accurate squares", "Press hems with an iron", "Sew two hemmed edges"],
     materials: ["Flat cotton or flannel sheet", "Thread", "Fabric chalk", "Clear ruler", "Iron"],
@@ -206,7 +242,7 @@ const WEEKS: WeekDef[] = [
     outing: "Thrift stop for pillow fabric",
   },
   {
-    n: 6, start: "2027-01-11", kind: "normal", title: "Project 1: finish the napkins",
+    n: 8, start: "2027-01-11", kind: "normal", title: "Project 1: finish the napkins",
     goal: "Finish all four napkins and give them a first use.",
     outcomes: ["Finish hems on all edges", "Press crisp corners", "Use your napkins at dinner"],
     materials: ["Napkin squares", "Thread", "Iron"],
@@ -223,7 +259,7 @@ const WEEKS: WeekDef[] = [
     outing: "Library, then a short walk downtown",
   },
   {
-    n: 7, start: "2027-01-18", kind: "normal", title: "Project 2: pillow cover",
+    n: 9, start: "2027-01-18", kind: "normal", title: "Project 2: pillow cover",
     goal: "Sew an envelope-back pillow cover.",
     outcomes: ["Cut a front and two back panels", "Make a clean hem on the back panels", "Sew a four-sided seam with corners"],
     materials: ["½ yard cotton or linen (or a thrifted curtain)", "16-inch pillow insert", "Thread", "Pins or clips"],
@@ -240,7 +276,7 @@ const WEEKS: WeekDef[] = [
     outing: "Coffee and journaling after the library",
   },
   {
-    n: 8, start: "2027-01-25", kind: "normal", title: "Finish pillow, measure for curtains",
+    n: 10, start: "2027-01-25", kind: "normal", title: "Finish pillow, measure for curtains",
     goal: "Finish the pillow cover and plan the curtains.",
     outcomes: ["Finish and use the pillow cover", "Measure windows accurately", "Make a curtain materials list"],
     materials: ["Pillow cover pieces", "Tape measure", "Pencil and notebook"],
@@ -257,7 +293,7 @@ const WEEKS: WeekDef[] = [
     outing: "Visit the Museum of Nebraska Art (check admission and hours first)",
   },
   {
-    n: 9, start: "2027-02-01", kind: "normal", title: "Project 3: curtains (cut and prep)",
+    n: 11, start: "2027-02-01", kind: "normal", title: "Project 3: curtains (cut and prep)",
     goal: "Buy or thrift fabric and cut the curtain panels.",
     outcomes: ["Cut panels to size", "Press and pin side hems", "Plan the rod pocket"],
     materials: ["Fabric or sheets", "Tape measure", "Scissors or rotary cutter", "Pins or clips", "Iron"],
@@ -274,7 +310,7 @@ const WEEKS: WeekDef[] = [
     outing: "Library: pick up garden books on hold",
   },
   {
-    n: 10, start: "2027-02-08", kind: "normal", title: "Curtains: hems and rod pocket",
+    n: 12, start: "2027-02-08", kind: "normal", title: "Curtains: hems and rod pocket",
     goal: "Sew side hems and rod pockets.",
     outcomes: ["Sew long straight hems", "Sew a rod pocket", "Check the length"],
     materials: ["Cut curtain panels", "Thread", "Iron"],
@@ -291,7 +327,7 @@ const WEEKS: WeekDef[] = [
     outing: "Library and coffee",
   },
   {
-    n: 11, start: "2027-02-15", kind: "normal", title: "Finish and hang the curtains",
+    n: 13, start: "2027-02-15", kind: "normal", title: "Finish and hang the curtains",
     goal: "Finish the curtains, hang them and review your sewing skills.",
     outcomes: ["Hang finished curtains", "Compare your first stitches to your last", "Visit the Extension office"],
     materials: ["Finished curtains", "Tension rod or rod", "Step stool"],
@@ -308,7 +344,7 @@ const WEEKS: WeekDef[] = [
     outing: "Visit the Buffalo County Extension office (1400 E 34th St) or call 308-236-1235",
   },
   {
-    n: 12, start: "2027-02-22", kind: "normal", title: "Project 4: AccuQuilt cutting",
+    n: 14, start: "2027-02-22", kind: "normal", title: "Project 4: AccuQuilt cutting",
     goal: "Cut quilt squares with the library's AccuQuilt.",
     outcomes: ["Cut nine 6½-inch squares", "Lay out a nine-patch design", "Plan your quilt top"],
     materials: ["Cotton shirts, sheets or scraps (pressed)", "Chalk", "Camera or phone"],
@@ -325,7 +361,7 @@ const WEEKS: WeekDef[] = [
     outing: "Library: AccuQuilt session",
   },
   {
-    n: 13, start: "2027-03-01", kind: "normal", title: "Project 4: piece the mini quilt",
+    n: 15, start: "2027-03-01", kind: "normal", title: "Project 4: piece the mini quilt",
     goal: "Sew your nine squares into a quilt top.",
     outcomes: ["Sew squares into rows", "Press seams in alternating directions", "Join the rows"],
     materials: ["Cut squares", "Thread", "Iron"],
@@ -342,7 +378,7 @@ const WEEKS: WeekDef[] = [
     outing: "Library: final AccuQuilt or sewing session",
   },
   {
-    n: 14, start: "2027-03-08", kind: "normal", title: "Finish and review the semester",
+    n: 16, start: "2027-03-08", kind: "normal", title: "Finish and review the semester",
     goal: "Finish a project, photograph your work and review the semester.",
     outcomes: ["Finish the mini quilt top or table runner", "Photograph everything you made", "Decide what to keep for spring"],
     materials: ["Quilt top, backing, batting", "Camera"],
@@ -473,8 +509,9 @@ function softDay(w: WeekDef, d: number): Lesson {
   });
   if (def.log) logs.push(def.log);
   if (w.kind !== "trip") steps.push(...baseEvening(id).filter((s) => s.id.endsWith("e2") || s.id.endsWith("e3")));
+  const date = addDays(w.start, d);
   return {
-    id, weekN: w.n, dayIdx: d, date: addDays(w.start, d), title: def.title,
+    id, weekN: w.n, dayIdx: weekdayIdx(date), date, title: def.title,
     theme: w.kind === "orientation" ? "Orientation" : w.kind === "trip" ? "Vegas" : "Light day",
     why: w.kind === "orientation" ? "Small setup steps now make every later day easier." : w.kind === "trip" ? "No coursework this week. Be present." : "A lighter day so the holidays stay restful.",
     soft: true, steps, logs,
@@ -482,7 +519,7 @@ function softDay(w: WeekDef, d: number): Lesson {
 }
 
 export const course: Week[] = WEEKS.map((w) => {
-  const lessons = Array.from({ length: 7 }, (_, d) => (w.days ? softDay(w, d) : normalDay(w, d)));
+  const lessons = w.days ? w.days.map((_, d) => softDay(w, d)) : Array.from({ length: 7 }, (_, d) => normalDay(w, d));
   return { n: w.n, start: w.start, title: w.title, goal: w.goal, kind: w.kind, outcomes: w.outcomes, materials: w.materials, lessons };
 });
 

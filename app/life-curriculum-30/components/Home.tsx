@@ -1,7 +1,7 @@
 "use client";
 
 import { useChecks } from "../lib/store";
-import { course, lessons, lessonForDate, dayName, prettyDate, COURSE_START, DAY_LONG } from "../lib/course";
+import { course, lessons, lessonForDate, dayName, prettyDate, weekLabel, COURSE_START, DAY_LONG } from "../lib/course";
 import { L } from "../lib/links";
 import { Bar, ExtLink } from "./ui";
 
@@ -22,16 +22,16 @@ export default function Home({ today }: { today: string }) {
   return (
     <div>
       <header className="lc-hero2">
-        <p className="lc-kicker">Winter Semester · Dec 7 – Mar 14 · Kearney, NE</p>
+        <p className="lc-kicker">Winter Semester · Nov 17 – Mar 14 · Kearney, NE</p>
         <h1>My Life Curriculum</h1>
         <p className="lc-why">Build a life worth living first. Then build an income that fits inside it.</p>
-        {before && <p className="lc-banner">Orientation starts Monday Nov 30. {daysBetween(today, COURSE_START)} days to go. You can look around until then.</p>}
+        {before && <p className="lc-banner">{daysBetween(today, COURSE_START) === 1 ? "Your course starts tomorrow, Tuesday Nov 17." : `Your course starts Tuesday Nov 17. ${daysBetween(today, COURSE_START)} days to go.`} You can look around until then.</p>}
       </header>
 
       <section className="lc-card lc-today">
         <p className="lc-kicker">{before ? "First lesson" : "Today"} · {DAY_LONG[lesson.dayIdx]}, {prettyDate(lesson.date)}</p>
         <h2>{lesson.title}</h2>
-        <p className="lc-note">{week.n === 0 ? "Orientation" : `Week ${week.n}`}: {week.title}</p>
+        <p className="lc-note">{weekLabel(week.n)}: {week.title}</p>
         <Bar value={stepsDone} max={lesson.steps.length} label="Today's steps" />
         <p className="lc-note">{stepsDone} of {lesson.steps.length} steps done</p>
         {next && <p>Next up: <b>{next.text}</b></p>}
@@ -40,7 +40,7 @@ export default function Home({ today }: { today: string }) {
 
       <section className="lc-card">
         <h2>This week</h2>
-        <ol className="lc-weekstrip">
+        <ol className="lc-weekstrip" style={{ gridTemplateColumns: `repeat(${week.lessons.length}, 1fr)` }}>
           {week.lessons.map((l) => (
             <li key={l.id}>
               <a href={`#/day/${l.id}`} className={`${done.has(l.id) ? "is-done " : ""}${l.id === lesson.id ? "is-now" : ""}`}>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useChecks, useJson, useStored } from "../lib/store";
-import { lessonById, lessons, lessonIndex, course, prettyDate, DAY_LONG, type Part, type Step } from "../lib/course";
+import { lessonById, lessons, lessonIndex, course, prettyDate, weekLabel, DAY_LONG, type Part, type Step } from "../lib/course";
 import { yt } from "../lib/links";
 import { Bar, Links } from "./ui";
 import LogSection from "./LogSection";
@@ -41,7 +41,7 @@ export default function DayView({ id }: { id: string }) {
   return (
     <article>
       <nav className="lc-crumbs" aria-label="Breadcrumb">
-        <a href="#/course">Course</a> › <a href={`#/week/${week.n}`}>{week.n === 0 ? "Orientation" : `Week ${week.n}`}: {week.title}</a>
+        <a href="#/course">Course</a> › <a href={`#/week/${week.n}`}>{weekLabel(week.n)}: {week.title}</a>
       </nav>
       <header className="lc-lessonhead">
         <p className="lc-kicker">{DAY_LONG[lesson.dayIdx]}, {prettyDate(lesson.date)} · {lesson.theme}</p>
