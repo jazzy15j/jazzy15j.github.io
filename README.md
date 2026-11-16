@@ -20,6 +20,9 @@ in plain language: what it does, who it helps, and why it matters.
   not linked from the portfolio and set to `noindex`). Photos live in
   `public/our-vegas-love-story/photos` with licenses in
   `app/our-vegas-love-story/lib/credits.json`.
+- `/life-curriculum-30` — Jasmine's personal life curriculum for age 30 (Dec 2026 – Dec 2027):
+  vision, ten pillars, weekly rhythm, first-90-days checklist, seasonal draft, income calculator,
+  open decisions and a journal. Saves to browser storage only; set to `noindex`.
 
 ## Run locally
 
